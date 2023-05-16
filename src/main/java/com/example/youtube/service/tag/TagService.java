@@ -7,7 +7,7 @@ import com.example.youtube.entity.tag.TagEntity;
 import com.example.youtube.enums.Language;
 import com.example.youtube.exps.TagNotFound;
 import com.example.youtube.repository.tag.TagRepository;
-import lombok.extern.slf4j.Slf4j;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,16 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @Service
-@Slf4j
+@AllArgsConstructor
 public class TagService {
     private final TagRepository tagRepository;
-    private final ResourceBundleService resourceBundleService;
 
-    public TagService(TagRepository tagRepository, ResourceBundleService resourceBundleService) {
-        this.tagRepository = tagRepository;
-        this.resourceBundleService = resourceBundleService;
-    }
+
 
     public TagResponseDTO create(TagCreateDTO dto) {
         TagEntity tagEntity = new TagEntity();
@@ -49,8 +47,7 @@ public class TagService {
         Optional<TagEntity> byId = tagRepository.findById(id);
 
         if (byId.isEmpty()) {
-            log.warn("Tag not found: {}", id);
-            throw new TagNotFound(resourceBundleService.getMessage("tag.not.found", String.valueOf(language)));
+            throw new TagNotFound("Tag not found");
         }
 
         TagEntity tagEntity = byId.get();
@@ -68,8 +65,7 @@ public class TagService {
         Optional<TagEntity> byId = tagRepository.findById(id);
 
         if (byId.isEmpty()) {
-            log.warn("Tag not found: {}", id);
-            throw new TagNotFound(resourceBundleService.getMessage("tag.not.found", String.valueOf(language)));
+            throw new TagNotFound("Tag not found");
         }
 
         tagRepository.delete(byId.get());
