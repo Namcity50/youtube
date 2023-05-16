@@ -66,7 +66,7 @@ public class SecurityConfig {
         http.csrf().disable().cors().disable();
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.authorizeHttpRequests()
-//                .requestMatchers("/api/v1/*/public/**").permitAll()
+                .requestMatchers("/api/v1/*/public/**").permitAll()
 //                .requestMatchers("/api/v1/auth/**").permitAll()
 //                .requestMatchers("/api/v1/auth").permitAll()
 //                .requestMatchers(AUTH_WHITELIST).permitAll()

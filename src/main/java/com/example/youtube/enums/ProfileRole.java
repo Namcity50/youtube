@@ -1,5 +1,5 @@
 package com.example.youtube.enums;
 
 public enum ProfileRole {
-    ADMIN, MODERATOR, PUBLISHER, USER ,NOT_PUBLISHER
+    ROLE_ADMIN, ROLE_USER
 }

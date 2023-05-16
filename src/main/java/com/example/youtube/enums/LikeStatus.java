@@ -1,5 +1,5 @@
 package com.example.youtube.enums;
 
 public enum LikeStatus {
-    LIKE,DISLIKE
+    ROLE_LIKE,ROLE_DISLIKE
 }
