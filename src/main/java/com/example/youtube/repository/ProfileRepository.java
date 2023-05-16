@@ -1,4 +1,7 @@
 package com.example.youtube.repository;
 
-public class ProfileRepository {
+import com.example.youtube.entity.ProfileEntity;
+import org.springframework.data.repository.CrudRepository;
+
+public interface ProfileRepository extends CrudRepository<ProfileEntity,Integer> {
 }
