@@ -21,4 +21,6 @@ public class CategoryEntity {
      private LocalDateTime created_date = LocalDateTime.now();
     @Column(name = "prt_id")
     private Integer prtId;
+    @Column(name = "visible")
+    private Boolean visible;
 }
