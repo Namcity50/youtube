@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @Entity
@@ -21,8 +22,6 @@ public class ProfileEntity {
     private String surname;
     @Column(name = "email")
     private String email;
-    @Column(name = "phone")
-    private String phone;
     @Column(name = "password")
     private String password;
     @Enumerated(EnumType.STRING)
@@ -36,7 +35,8 @@ public class ProfileEntity {
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
     // photo_id
-    @Column(name = "prt_id")
-    private Integer prtId;
+    @OneToOne
+    @JoinColumn(name = "photo_id")
+    private AttachEntity attachEntity;
 
 }
