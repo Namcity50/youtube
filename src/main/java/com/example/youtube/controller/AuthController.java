@@ -4,15 +4,15 @@ import com.example.youtube.dto.AuthDTO;
 import com.example.youtube.dto.RegistrationDTO;
 import com.example.youtube.service.AuthService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@AllArgsConstructor
 public class AuthController {
-    @Autowired
-    private AuthService authService;
+    private final AuthService authService;
     @PostMapping("/public/register")
     public ResponseEntity<?> registration(@RequestBody @Valid RegistrationDTO dto) {
         return ResponseEntity.ok(authService.registration(dto));

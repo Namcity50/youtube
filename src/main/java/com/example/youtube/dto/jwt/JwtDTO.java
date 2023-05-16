@@ -7,10 +7,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class JwtDTO {
-
     private String mail;
     private ProfileRole role;
 

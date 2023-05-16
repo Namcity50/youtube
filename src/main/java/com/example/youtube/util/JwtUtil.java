@@ -4,9 +4,10 @@ import com.example.youtube.enums.ProfileRole;
 import com.example.youtube.exps.MethodNotAllowedException;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
-
+@Service
 public class JwtUtil {
     private static final int tokenLiveTime = 1000 * 3600 * 24; // 1-day
     private static final String secretKey = "dasda143mazgi";
@@ -95,5 +96,4 @@ public class JwtUtil {
             throw new MethodNotAllowedException("Method not allowed");
         }
     }
-
 }

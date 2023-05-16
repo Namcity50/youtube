@@ -1,15 +1,12 @@
-package com.example.youtube.dto;
-
+package com.example.youtube.dto.profile;
 import com.example.youtube.enums.GeneralStatus;
 import com.example.youtube.enums.ProfileRole;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProfileDTO {
     private Integer id;
     private String name;

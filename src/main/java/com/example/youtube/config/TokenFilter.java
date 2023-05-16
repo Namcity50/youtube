@@ -49,7 +49,7 @@ import java.util.Arrays;
                 return;
             }
             String token = authHeader.substring(7);
-            JwtDTO jwtDto;
+            JwtDTO jwtDto ;
             try {
                 jwtDto = JwtUtil.decode(token);
                 UserDetails userDetails = userDetailsService.loadUserByUsername(jwtDto.getMail());
