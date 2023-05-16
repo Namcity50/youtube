@@ -49,7 +49,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return profileEntity.getStatus().equals(GeneralStatus.ACTIVE);
+        return profileEntity.getStatus().equals(GeneralStatus.ROLE_ACTIVE);
     }
 
     @Override

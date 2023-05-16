@@ -1,14 +1,14 @@
 package com.example.youtube.dto;
 
-import com.example.youtube.enums.ProfileRole;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AuthResponseDTO {
+public class RegistrationDTO {
     private String name;
     private String surname;
-    private ProfileRole role;
-    private String jwt;
+    private String email;
+    private AttachDTO attach;
+    private String password;
 }

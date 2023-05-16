@@ -57,7 +57,7 @@
 *** Task List ***
 0. Auth
 	1. Registration (with email verification)
-	  id,name,surname,email,main_photo (url)
+	  id,name,surname,email,main_photo (url),password
 	2. Authorization
 
 1. Profile (USER role)
