@@ -1,0 +1,3 @@
+### Update password
+PUT localhost:8080/api/v1/profile/private/password?id=1&pass=2222
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyNTA5NTEsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWtAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDMzNzM1MSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.iCfPjA6eFh-LkdRQ6dwE-r1fdBViYngE669-9brnypOmfec0Pr4y560s_jBgfmFLmHysrMZyGrXIkujG5c3fPg
