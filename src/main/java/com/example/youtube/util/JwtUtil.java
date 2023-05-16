@@ -11,12 +11,12 @@ public class JwtUtil {
     private static final int tokenLiveTime = 1000 * 3600 * 24; // 1-day
     private static final String secretKey = "dasda143mazgi";
 
-    public static String encode(Integer profileId, ProfileRole role) {
+    public static String encode(String email, ProfileRole role) {
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.setIssuedAt(new Date());
         jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
 
-        jwtBuilder.claim("id", profileId);
+        jwtBuilder.claim("email", email);
         jwtBuilder.claim("role", role);
 
         jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));

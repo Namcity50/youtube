@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
+
 @Service
 public class AttachService {
     @Autowired
@@ -32,6 +33,7 @@ public class AttachService {
     private String folderName;
     @Value("${server.host}")
     private String domainName;
+
     public AttachDTO save(MultipartFile file) {
         try {
             String pathFolder = getYmDString(); // 2022/04/23
@@ -60,6 +62,7 @@ public class AttachService {
         }
         return null;
     }
+
     public byte[] open(String attachId) {
         // 20f0f915-93ec-4099-97e3-c1cb7a95151f.jpg
 //        int lastIndex = attachName.lastIndexOf(".");
@@ -75,7 +78,6 @@ public class AttachService {
         }
         return new byte[0];
     }
-
 
 
     public Resource download(String fileName) {
@@ -148,7 +150,7 @@ public class AttachService {
         dto.setCreatedData(entity.getCreatedDate());
         dto.setOriginalName(entity.getOriginalName());
         dto.setPath(entity.getPath());
-        dto.setUrl(domainName + "/" + "api/v1/attach/open/" + entity.getPath() + "/" + entity.getId() + "." + entity.getExtension());
+        dto.setUrl(domainName + "/api/v1/attach/public/open/" + entity.getId());
         dto.setSize(entity.getSize());
         dto.setExtension(entity.getExtension());
         return dto;
@@ -157,7 +159,7 @@ public class AttachService {
     public AttachDTO getAttachLink(String attachId) {
         AttachDTO dto = new AttachDTO();
         dto.setId(attachId);
-        dto.setUrl(domainName + "/api/v1/attach/open/" + attachId);
+        dto.setUrl(domainName + "/api/v1/attach/public/open/" + attachId);
         return dto;
     }
 
