@@ -43,7 +43,7 @@ public class SecurityConfig {
          return authenticationProvider;
      }
  */
-    public static String[] AUTH_WHITELIST = {"api/v1/*/public/**",
+    public static String[] AUTH_WHITELIST = {"/api/v1/*/public/**",
             "/api/v1/auth/**",
             "/api/v1/auth"
     };
@@ -67,7 +67,6 @@ public class SecurityConfig {
         http.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         http.authorizeHttpRequests()
                 .requestMatchers("/api/v1/*/public/**").permitAll()
-//                .requestMatchers("/api/v1/attach/public/open/**").permitAll()
 //                .requestMatchers("/api/v1/auth/**").permitAll()
 //                .requestMatchers("/api/v1/auth").permitAll()
 //                .requestMatchers(AUTH_WHITELIST).permitAll()
