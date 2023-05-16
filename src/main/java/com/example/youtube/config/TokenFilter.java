@@ -20,50 +20,50 @@ import java.io.IOException;
 import java.util.Arrays;
 
 @Component
-public class TokenFilter extends OncePerRequestFilter {
-    @Autowired
-    private UserDetailsService userDetailsService;
+    public class TokenFilter extends OncePerRequestFilter {
+        @Autowired
+        private UserDetailsService userDetailsService;
 
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        AntPathMatcher pathMatcher = new AntPathMatcher();
-        return Arrays.asList(SecurityConfig.AUTH_WHITELIST).stream()
-                .anyMatch(p -> {
-                    boolean match = pathMatcher.match(p, request.getServletPath());
-                    return match;
-                });
-    }
-
-    @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("doFilter method");
-
-        final String authHeader = request.getHeader("Authorization");
-
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.setHeader("Message", "Token Not Found.");
-            filterChain.doFilter(request, response);
-            return;
+        @Override
+        protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+            AntPathMatcher pathMatcher = new AntPathMatcher();
+            return Arrays.asList(SecurityConfig.AUTH_WHITELIST).stream()
+                    .anyMatch(p -> {
+                        boolean match = pathMatcher.match(p, request.getServletPath());
+                        return match;
+                    });
         }
-        String token = authHeader.substring(7);
-        JwtDTO jwtDto;
-        try {
-            jwtDto = JwtUtil.decode(token);
-            UserDetails userDetails = userDetailsService.loadUserByUsername(jwtDto.getMail());
 
-            UsernamePasswordAuthenticationToken
-                    authentication = new UsernamePasswordAuthenticationToken(userDetails,
-                    null, userDetails.getAuthorities());
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            filterChain.doFilter(request, response);
-        } catch (JwtException e) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.setHeader("Message", "Token Not Valid");
-            return;
+        @Override
+        protected void doFilterInternal(HttpServletRequest request,
+                                        HttpServletResponse response,
+                                        FilterChain filterChain) throws ServletException, IOException {
+            System.out.println("doFilter method");
+
+            final String authHeader = request.getHeader("Authorization");
+
+            if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.setHeader("Message", "Token Not Found.");
+                filterChain.doFilter(request, response);
+                return;
+            }
+            String token = authHeader.substring(7);
+            JwtDTO jwtDto;
+            try {
+                jwtDto = JwtUtil.decode(token);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(jwtDto.getMail());
+
+                UsernamePasswordAuthenticationToken
+                        authentication = new UsernamePasswordAuthenticationToken(userDetails,
+                        null, userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                filterChain.doFilter(request, response);
+            } catch (JwtException e) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.setHeader("Message", "Token Not Valid");
+                return;
+            }
         }
     }
-}
