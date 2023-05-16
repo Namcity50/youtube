@@ -23,6 +23,8 @@ public class AttachEntity {
     private Long size;
     @Column
     private String extension;
+    @Column
+    private Integer duration;
     @Column(name = "created_date")
     private LocalDateTime createdDate;
 }
