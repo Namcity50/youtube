@@ -1,3 +1,35 @@
 ### Update password
-PUT localhost:8080/api/v1/profile/private/password?id=1&pass=2222
+PUT localhost:8080/api/v1/profile/private/password?pass=4444
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyNTA5NTEsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWtAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDMzNzM1MSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.iCfPjA6eFh-LkdRQ6dwE-r1fdBViYngE669-9brnypOmfec0Pr4y560s_jBgfmFLmHysrMZyGrXIkujG5c3fPg
+
+### Update email
+PUT localhost:8080/api/v1/profile/private/updateEmail?email=muxsinbekmuysinov@gmail.com
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMTE5OTcsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWs5MkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0Mzk4Mzk3LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.c9R47oMKsJk24fa0VMTXTpxfGcEgDg5yl-ZHpYgcm6a2Xb_1r2N3nYyUhTxi_SY_h8tR5k8pWY9CL5n3vRl6gg
+
+### Update NameAndSurname
+POST localhost:8080/api/v1/profile/private/updateNameAndSurname
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMTYzNDksImVtYWlsIjoibXV4c2luYmVrbXV5c2lub3ZAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDQwMjc0OSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.3-AsG-yU87rP2las6FsOvx-Af-QWDFJnGlWazlW8IzxRjP6b74ZpLy5HMdfBRusk1GhaRc6CZoNWfyKLJGhQWA
+Content-Type:  application/json
+
+{
+  "name": "ali",
+  "surname": "gani"
+}
+
+### Get detail
+GET localhost:8080/api/v1/profile
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMTYzNDksImVtYWlsIjoibXV4c2luYmVrbXV5c2lub3ZAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDQwMjc0OSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.3-AsG-yU87rP2las6FsOvx-Af-QWDFJnGlWazlW8IzxRjP6b74ZpLy5HMdfBRusk1GhaRc6CZoNWfyKLJGhQWA
+Content-Type:  application/json
+
+### Create Employee
+POST localhost:8080/api/v1/profile/private/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMjI0NjksImVtYWlsIjoibXV4c2luYmVrbXV5c2lub3ZAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE2ODQ0MDg4NjksImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.K0TgPrC95dMAE0h5Npb1_M8jz_1A-syotNeEFMLKcOobwLQOmoF_hdPvH_Es0Nh9PbDszM32DXrZOJaU4KXxlg
+Content-Type:  application/json
+
+{
+  "name": "jgjjgj",
+  "surname": "lslslsl",
+  "email": "muysinovmuxsinbek333@gmail.com",
+  "role": "ROLE_MODERATOR"
+}
+

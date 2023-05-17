@@ -28,18 +28,20 @@ public class ProfileService {
         return entity > 0;
     }
 
-    public String updateEmail(Integer id, String email) {
+    public Boolean updateEmail(String email) {
+        Integer id = SpringSecurityUtil.getProfileId();
         ProfileEntity profileEntity = getByProfileId(id);
         mailSenderService.checkLimit(email);
         mailSenderService.sendRegistrationEmail(email);
         String s = "Verification link was send to email: " + email;
-        ProfileEntity entity = profileRepository.updateEmail(profileEntity.getId(), email);
-        return entity.getEmail();
+        Integer i = profileRepository.updateEmail(profileEntity.getId(), email);
+        return i > 0;
     }
 
-    public Boolean updateNameAndSurname(Integer id, String name, String surname) {
+    public Boolean updateNameAndSurname(ProfileDTO dto ) {
+        Integer id = SpringSecurityUtil.getProfileId();
         ProfileEntity entity = getByProfileId(id);
-        int i = profileRepository.updateNameAndSurname(entity.getId(), name, surname);
+        int i = profileRepository.updateNameAndSurname(entity.getId(), dto.getName(), dto.getSurname());
         return i > 0;
     }
 
@@ -63,11 +65,11 @@ public class ProfileService {
 //        profileRepository.save(entity);
         return true;
     }
-
-    public ProfileResponseDTO getProfileDetail(Integer id) {
-        ProfileEntity entity = getByProfileId(id);
-        return getResponseDto(entity);
-
+    public ProfileResponseDTO getDetail(){
+        Integer id = SpringSecurityUtil.getProfileId();
+        ProfileEntity entity = profileRepository.findByProfile(id);
+        ProfileResponseDTO dto = getResponseDto(entity);
+        return dto;
     }
 
     public ProfileDTO createEmployee(ProfileDTO dto) {
@@ -76,9 +78,6 @@ public class ProfileService {
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
         entity.setEmail(dto.getEmail());
-        if (!dto.getRole().equals(ProfileRole.ROLE_ADMIN) || !dto.getRole().equals(ProfileRole.ROlE_MODERATOR)) {
-            throw new AppBadRequestException("Your Role Wrong: ");
-        }
         entity.setRole(dto.getRole());
         profileRepository.save(entity);
         dto.setId(entity.getId());
