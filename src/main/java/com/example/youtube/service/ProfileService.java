@@ -1,25 +1,17 @@
 package com.example.youtube.service;
 
-import com.example.youtube.dto.AttachDTO;
 import com.example.youtube.dto.profile.ProfileDTO;
 import com.example.youtube.dto.profile.ProfileResponseDTO;
-import com.example.youtube.entity.AttachEntity;
 import com.example.youtube.entity.ProfileEntity;
-import com.example.youtube.enums.GeneralStatus;
 import com.example.youtube.enums.ProfileRole;
 import com.example.youtube.exps.AppBadRequestException;
 import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.repository.AttachRepository;
 import com.example.youtube.repository.ProfileRepository;
-import com.example.youtube.util.MD5Util;
 import com.example.youtube.util.SpringSecurityUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 
 @Service

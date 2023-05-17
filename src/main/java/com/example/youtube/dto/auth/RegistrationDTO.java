@@ -1,5 +1,6 @@
-package com.example.youtube.dto;
+package com.example.youtube.dto.auth;
 
+import com.example.youtube.dto.attach.AttachDTO;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,7 +1,7 @@
 package com.example.youtube.controller;
 
-import com.example.youtube.dto.AuthDTO;
-import com.example.youtube.dto.RegistrationDTO;
+import com.example.youtube.dto.auth.AuthDTO;
+import com.example.youtube.dto.auth.RegistrationDTO;
 import com.example.youtube.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
