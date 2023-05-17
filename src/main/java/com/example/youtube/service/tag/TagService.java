@@ -7,6 +7,7 @@ import com.example.youtube.entity.tag.TagEntity;
 import com.example.youtube.enums.Language;
 import com.example.youtube.exps.TagNotFound;
 import com.example.youtube.repository.tag.TagRepository;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -16,15 +17,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Slf4j
+@AllArgsConstructor
 public class TagService {
     private final TagRepository tagRepository;
-    private final ResourceBundleService resourceBundleService;
 
-    public TagService(TagRepository tagRepository, ResourceBundleService resourceBundleService) {
-        this.tagRepository = tagRepository;
-        this.resourceBundleService = resourceBundleService;
-    }
+
 
     public TagResponseDTO create(TagCreateDTO dto) {
         TagEntity tagEntity = new TagEntity();
@@ -48,10 +45,10 @@ public class TagService {
     public Boolean updateById(Integer id, TagUpdateDTO tagUpdateDTO, Language language) {
         Optional<TagEntity> byId = tagRepository.findById(id);
 
-        if (byId.isEmpty()) {
-            log.warn("Tag not found: {}", id);
-            throw new TagNotFound(resourceBundleService.getMessage("tag.not.found", String.valueOf(language)));
-        }
+//        if (byId.isEmpty()) {
+//            log.warn("Tag not found: {}", id);
+//            throw new TagNotFound(resourceBundleService.getMessage("tag.not.found", String.valueOf(language)));
+//        }
 
         TagEntity tagEntity = byId.get();
         if (!tagUpdateDTO.getName().startsWith("#")) {
@@ -67,10 +64,10 @@ public class TagService {
     public Boolean deleteById(Integer id, Language language) {
         Optional<TagEntity> byId = tagRepository.findById(id);
 
-        if (byId.isEmpty()) {
-            log.warn("Tag not found: {}", id);
-            throw new TagNotFound(resourceBundleService.getMessage("tag.not.found", String.valueOf(language)));
-        }
+//        if (byId.isEmpty()) {
+//            log.warn("Tag not found: {}", id);
+//            throw new TagNotFound(resourceBundleService.getMessage("tag.not.found", String.valueOf(language)));
+//        }
 
         tagRepository.delete(byId.get());
         return true;

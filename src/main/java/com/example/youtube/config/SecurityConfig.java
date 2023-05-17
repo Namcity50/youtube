@@ -70,7 +70,7 @@ public class SecurityConfig {
 //                .requestMatchers("/api/v1/auth/**").permitAll()
 //                .requestMatchers("/api/v1/auth").permitAll()
 //                .requestMatchers(AUTH_WHITELIST).permitAll()
-//                .requestMatchers("/api/v1/article/private").hasRole("USER")
+                .requestMatchers("/api/v1/*/private/admin/**").hasRole("ADMIN")
 //                .requestMatchers("/api/v1/profile/adm/**").hasRole("ADMIN")
 //                .requestMatchers(HttpMethod.PUT, "/api/v1/article/private/*").hasAnyRole("MODERATOR", "ADMIN")
                 .anyRequest()
