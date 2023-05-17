@@ -19,11 +19,13 @@ public interface ProfileRepository extends JpaRepository<ProfileEntity,Integer> 
     @Modifying
     @Transactional
     @Query("update ProfileEntity set email =?2 where id = ?1 ")
-    ProfileEntity updateEmail(Integer id, String email);
+    int updateEmail(Integer id, String email);
     @Modifying
     @Transactional
     @Query("update ProfileEntity set name =?2, surname = ?3 where id = ?1 ")
     int updateNameAndSurname(Integer id, String name, String surname);
+    @Query(value = " select * from profile where id = ?1 ", nativeQuery = true)
+    ProfileEntity findByProfile(Integer id);
 //    @Modifying
 //    @Transactional
 //    @Query("update ProfileEntity set attachId =?1")
