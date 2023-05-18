@@ -1,6 +1,7 @@
 package com.example.youtube.service;
 
 import com.example.youtube.dto.attach.AttachDTO;
+import com.example.youtube.dto.attach.AttachPlayListInfoDTO;
 import com.example.youtube.entity.AttachEntity;
 import com.example.youtube.exps.AppBadRequestException;
 import com.example.youtube.exps.ItemNotFoundException;
@@ -149,11 +150,10 @@ public class AttachService {
         return dto;
     }
 
-    public AttachDTO getAttachLink(String attachId) {
-        AttachDTO dto = new AttachDTO();
-        dto.setId(attachId);
-        dto.setUrl(domainName + "/api/v1/attach/public/open/" + attachId);
-        return dto;
+    public String getAttachLink(String attachId) {
+
+        return (domainName + "/api/v1/attach/public/open/" + attachId);
+
     }
 
 }

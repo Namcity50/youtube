@@ -1,12 +1,38 @@
 ### create playlist
-POST localhost:8080/api/v1/playList/private/create
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMjg3OTYsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWszM0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDE1MTk2LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.ikXJpLlq5mN3QyuQtJLr822Txzizz8pYFBzdnTdVD6L7v86-1Ov_B9oz4QqXO48hIIKA61OdIwMYZqKPYQcDFw
+POST localhost:8080/api/v1/playlist/private/user/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0MDkyNTIsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWszM0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDk1NjUyLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.IpL9H-3E1XcaeYw4_U5neXouOWD9UJRbro3_vUYlc4hzgL-DhIUaY1cs6_NBTa4ilrMviG3toQ_hWE9BqNNeCA
 Content-Type:  application/json
 
 {
-  "name": "ali",
-  "channelId": "4u5hi4uh5iu45h",
-  "description": "fkjfdjldjf",
-  "status": "ROLE_PRIVATE",
-  "orderNumber": "3"
+  "name": "aliaefffee",
+  "channelId": "4u5hi4uh5iu45heeefffffeeeee",
+  "description": "fkjfdjldjfeeeeeffff",
+  "orderNumber": "333444"
 }
+
+### PlayList update
+PUT localhost:8080/api/v1/playlist/private/user/update?id=2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0MDkyNTIsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWszM0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDk1NjUyLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.IpL9H-3E1XcaeYw4_U5neXouOWD9UJRbro3_vUYlc4hzgL-DhIUaY1cs6_NBTa4ilrMviG3toQ_hWE9BqNNeCA
+Content-Type:  application/json
+
+{
+  "name": "aliadsdsd",
+  "channelId": "4u5hi4uh5iu45h",
+  "description": "fkjfdjldjfdsd",
+  "orderNumber": "222"
+}
+
+### PlayList changeStatus
+PUT localhost:8080/api/v1/playlist/private/user/changeStatus?id=2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0MDkyNTIsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWszM0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDk1NjUyLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.IpL9H-3E1XcaeYw4_U5neXouOWD9UJRbro3_vUYlc4hzgL-DhIUaY1cs6_NBTa4ilrMviG3toQ_hWE9BqNNeCA
+Content-Type:  application/json
+
+### PlayList delete
+DELETE localhost:8080/api/v1/playlist/private/delete?id=2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0MDkyNTIsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWszM0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDk1NjUyLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.IpL9H-3E1XcaeYw4_U5neXouOWD9UJRbro3_vUYlc4hzgL-DhIUaY1cs6_NBTa4ilrMviG3toQ_hWE9BqNNeCA
+Content-Type:  application/json
+
+### PlayList delete
+GET localhost:8080/api/v1/playlist/private/admin/pagination?page=2&size=3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0MTQzNzcsImVtYWlsIjoibXV4c2luYmVrbXV5c2lub3ZAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE2ODQ1MDA3NzcsImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.DkLc1y1bTXJETb22iiLcG8vPFnidzG02n2jax99XGAfxq9hnVI6i8iPqp1msdmQ0aBfQxKeXo6HpHyWZo7jSoQ
+Content-Type:  application/json

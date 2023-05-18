@@ -1,5 +1,5 @@
 ### Update password
-PUT localhost:8080/api/v1/profile/private/password?pass=4444
+PUT localhost:8080/api/v1/profile/private/password?pass=5555
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyNTA5NTEsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWtAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDMzNzM1MSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.iCfPjA6eFh-LkdRQ6dwE-r1fdBViYngE669-9brnypOmfec0Pr4y560s_jBgfmFLmHysrMZyGrXIkujG5c3fPg
 
 ### Update email
@@ -22,7 +22,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMTYzNDksImVtYWlsIjoib
 Content-Type:  application/json
 
 ### Create Employee
-POST localhost:8080/api/v1/profile/private/create
+POST localhost:8080/api/v1/profile/private/admin/create
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMjI0NjksImVtYWlsIjoibXV4c2luYmVrbXV5c2lub3ZAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE2ODQ0MDg4NjksImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.K0TgPrC95dMAE0h5Npb1_M8jz_1A-syotNeEFMLKcOobwLQOmoF_hdPvH_Es0Nh9PbDszM32DXrZOJaU4KXxlg
 Content-Type:  application/json
 
