@@ -25,6 +25,8 @@ public class PlayListEntity {
     private PlayListEnums status;
     @Column(name = "order_number")
     private Integer orderNumber;
+    @Column(name = "profile_id")
+    private Integer profileId;
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
     @Column(name = "visible")

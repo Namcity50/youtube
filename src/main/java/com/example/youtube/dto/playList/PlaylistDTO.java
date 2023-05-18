@@ -1,4 +1,4 @@
-package com.example.youtube.dto;
+package com.example.youtube.dto.playList;
 
 import com.example.youtube.enums.PlayListEnums;
 import com.fasterxml.jackson.annotation.JsonInclude;

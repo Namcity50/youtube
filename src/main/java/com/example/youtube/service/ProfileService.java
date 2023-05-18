@@ -2,16 +2,25 @@ package com.example.youtube.service;
 
 import com.example.youtube.dto.profile.ProfileDTO;
 import com.example.youtube.dto.profile.ProfileResponseDTO;
+import com.example.youtube.entity.AttachEntity;
 import com.example.youtube.entity.ProfileEntity;
 import com.example.youtube.enums.ProfileRole;
 import com.example.youtube.exps.AppBadRequestException;
 import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.repository.AttachRepository;
 import com.example.youtube.repository.ProfileRepository;
+import com.example.youtube.util.MD5Util;
 import com.example.youtube.util.SpringSecurityUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 @Service
@@ -20,11 +29,12 @@ public class ProfileService {
     private final ProfileRepository profileRepository;
     private final AttachRepository attachRepository;
     private final MailSenderService mailSenderService;
+    private final AttachService attachService;
 
-    public Boolean changePassword(String pass) {
+    public Boolean changePassword(Integer pass) {
         Integer profileId = SpringSecurityUtil.getProfileId();
         ProfileEntity profileEntity = getByProfileId(profileId);
-        int entity = profileRepository.updatePassword(profileEntity.getId(), pass);
+        int entity = profileRepository.updatePassword(profileEntity.getId(), MD5Util.encode(String.valueOf(pass)));
         return entity > 0;
     }
 
@@ -45,26 +55,31 @@ public class ProfileService {
         return i > 0;
     }
 
-    public Boolean changeAttach(Integer id, ProfileDTO dto) {
+//    public Boolean changeAttach(MultipartFile file) {
+//        Integer id = SpringSecurityUtil.getProfileId();
 //        Optional<ProfileEntity> optional = profileRepository.findById(id);
 //        ProfileEntity entity = optional.get();
-//        int lastIndex = dto.getPhoto().lastIndexOf(".");
-//        String name = dto.getPhoto().substring(0, lastIndex);
+//        try {
+//            String pathFolder = attachService.getYmDString(); // 2022/04/23
+//            File folder = new File(folderName + "/" + pathFolder);  // attaches/2023/04/26
+//            if (!folder.exists()) {
+//                folder.mkdirs();
+//            }
+//            byte[] bytes = file.getBytes();
+//            String extension = attachService.getExtension(file.getOriginalFilename());
 //        AttachEntity attachEntity = attachService.get(name);
-//        if (!entity.getImage().equals(attachEntity)) {
-//            entity.setImage(attachEntity);
+//        if (!entity.getAttachId().equals(attachEntity.getId())) {
+//            entity.setAttachId(attachEntity.getId());
 //        }
 //        profileRepository.deleteById(entity.getId());
-//        Path file = Paths.get("attaches/" + dto.getImage());
-//        try {                                                     // attaches/2023/4/25/20f0f915-93ec-4099-97e3-c1cb7a95151f.jpg
-//            Files.deleteIfExists(file);
+//        Path file1 = Paths.get("attaches/" + dto.getPhoto());
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-//        entity.setImage(attachEntity);
+//        entity.setAttachId(attachEntity.getId());
 //        profileRepository.save(entity);
-        return true;
-    }
+//        return true;
+//    }
     public ProfileResponseDTO getDetail(){
         Integer id = SpringSecurityUtil.getProfileId();
         ProfileEntity entity = profileRepository.findByProfile(id);
@@ -78,6 +93,9 @@ public class ProfileService {
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
         entity.setEmail(dto.getEmail());
+        if (!(dto.getRole().equals(ProfileRole.ROlE_MODERATOR) || dto.getRole().equals(ProfileRole.ROLE_ADMIN))){
+            throw new AppBadRequestException(" Error profile role: ");
+        }
         entity.setRole(dto.getRole());
         profileRepository.save(entity);
         dto.setId(entity.getId());
@@ -94,7 +112,7 @@ public class ProfileService {
         return dto;
     }
 
-    private ProfileEntity getByProfileId(Integer id) {
+    public ProfileEntity getByProfileId(Integer id) {
         Optional<ProfileEntity> optional = profileRepository.findById(id);
         if (optional.isEmpty()) {
             throw new ItemNotFoundException(" Not found profile");
