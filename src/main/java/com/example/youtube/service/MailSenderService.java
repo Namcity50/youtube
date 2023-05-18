@@ -37,8 +37,6 @@ public class MailSenderService {
         stringBuilder.append("Link: ");
         stringBuilder.append(serverHost).append("/api/v1/auth/public/email/verification/");
         stringBuilder.append(JwtUtil.encode(toAccount));
-        // https://kun.uz/api/v1/auth//email/verification/dasdasdasd.asdasdad.asda
-        // localhost:8080/api/v1/auth/email/verification/dasdasdasd.asdasdad.asda
         sendEmail(toAccount, "Registration", stringBuilder.toString());
     }
     void sendEmail(String toAccount, String subject, String text) {

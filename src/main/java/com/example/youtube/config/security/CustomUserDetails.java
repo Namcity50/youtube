@@ -1,15 +1,11 @@
 package com.example.youtube.config.security;
-
 import com.example.youtube.entity.ProfileEntity;
 import com.example.youtube.enums.GeneralStatus;
 import com.example.youtube.enums.ProfileRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 public class CustomUserDetails implements UserDetails {

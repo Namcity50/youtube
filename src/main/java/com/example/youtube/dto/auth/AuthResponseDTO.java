@@ -1,4 +1,4 @@
-package com.example.youtube.dto;
+package com.example.youtube.dto.auth;
 
 import com.example.youtube.enums.ProfileRole;
 import lombok.Getter;

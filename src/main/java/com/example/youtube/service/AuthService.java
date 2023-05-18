@@ -1,8 +1,8 @@
 package com.example.youtube.service;
 
-import com.example.youtube.dto.AuthDTO;
-import com.example.youtube.dto.AuthResponseDTO;
-import com.example.youtube.dto.RegistrationDTO;
+import com.example.youtube.dto.auth.AuthDTO;
+import com.example.youtube.dto.auth.AuthResponseDTO;
+import com.example.youtube.dto.auth.RegistrationDTO;
 import com.example.youtube.entity.ProfileEntity;
 import com.example.youtube.enums.GeneralStatus;
 import com.example.youtube.enums.ProfileRole;
@@ -13,7 +13,6 @@ import com.example.youtube.repository.ProfileRepository;
 import com.example.youtube.util.JwtUtil;
 import com.example.youtube.util.MD5Util;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 @Service
@@ -65,7 +64,7 @@ public class AuthService {
         responseDTO.setName(entity.getName());
         responseDTO.setSurname(entity.getSurname());
         responseDTO.setRole(entity.getRole());
-        responseDTO.setJwt(JwtUtil.encode(entity.getId(), entity.getRole()));
+        responseDTO.setJwt(JwtUtil.encode(entity.getEmail(), entity.getRole()));
         return responseDTO;
     }
     public Object emailVerification(String jwt) {
