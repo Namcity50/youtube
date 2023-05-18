@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/playList")
 @AllArgsConstructor
 public class PlayListController {
+
     private final PlayListService playListService;
     @PostMapping("/private/create")
     public ResponseEntity<PlaylistDTO> create(@RequestBody PlaylistDTO dto){
