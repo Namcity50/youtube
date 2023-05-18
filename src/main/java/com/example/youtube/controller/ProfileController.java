@@ -20,7 +20,7 @@ public class ProfileController {
     private final ProfileService profileService;
 
     @PutMapping("/private/password")
-    public ResponseEntity<Boolean> changePassword(@RequestParam(value = "pass") String pass,
+    public ResponseEntity<Boolean> changePassword(@RequestParam(value = "pass") Integer pass,
                                                   HttpServletRequest request ){
         return ResponseEntity.ok(profileService.changePassword(pass));
     }
@@ -39,7 +39,7 @@ public class ProfileController {
     public ResponseEntity<ProfileResponseDTO> getDetail(){
         return ResponseEntity.ok(profileService.getDetail());
     }
-    @PostMapping("/private/create")
+    @PostMapping("/private/admin/create")
     public ResponseEntity<ProfileDTO> createEmployee(@RequestBody ProfileDTO dto){
         return ResponseEntity.ok(profileService.createEmployee(dto));
     }

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -17,41 +18,45 @@ public class VideoEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     @Column(name = "preview_attach_id")
-    private Integer preview_attach_id;
+    private String previewAttachId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "preview_attach_id",insertable = false,updatable = false)
+    private AttachEntity previewAttach;
     @Column(name = "title")
     private String title;
-    @JoinColumn(name = "category_id")
+    @Column(name = "category_id")
     private Integer categoryId;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id",insertable = false,updatable = false)
     private CategoryEntity category;
     @Column(name = "attach_id")
     private String attachId;
-    @Column(name = "cteated_date")
-    private LocalDateTime created_date = LocalDateTime.now();
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "attach_id",insertable = false,updatable = false)
+    private AttachEntity attach;
+    @Column(name = "created_date")
+    private LocalDateTime createdDate = LocalDateTime.now();
     @Column(name = "published_date")
-    private LocalDateTime published_date;
+    private LocalDateTime publishedDate;
     @Column(name = "type")
     private VideoType type;
     @Column(name = "view_count")
-    private Integer view_count;
+    private Integer viewCount;
     @Column(name = "shared_count")
-    private Integer shared_count;
+    private Integer sharedCount;
     @Column(name = "description")
     private String description;
     @Column(name = "channel_id")
     private String channelId;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "channel_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "channel_id",insertable = false,updatable = false)
     private ChannelEntity channel;
     @Column(name = "like_count")
-    private Integer like_count;
+    private Integer likeCount;
     @Column(name = "dislike_count")
-    private Integer dislike_count;
+    private Integer dislikeCount;
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private VideoStatus status;
-    @Column(name = "profile_id")
-    private Integer profileId;
 
 }
