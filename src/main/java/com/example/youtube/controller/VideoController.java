@@ -34,5 +34,12 @@ public class VideoController {
         return ResponseEntity.ok().body(videoService.IncreaseViewCount(id,dto));
     }
 
+    @GetMapping("/public/getCategoryIdPaging")
+    public ResponseEntity<?> categoryIdPaging(@RequestParam(value = "page",defaultValue = "1")int page,
+                                              @RequestParam(value = "size",defaultValue = "10")int size,
+                                              @RequestParam(value = "id")Integer id){
+        return ResponseEntity.ok(videoService.getArticleByCategoryIdPaging(page,size,id));
+    }
+
 
 }
