@@ -3,12 +3,9 @@ package com.example.youtube.service.tag;
 import com.example.youtube.dto.tag.TagCreateDTO;
 import com.example.youtube.dto.tag.TagResponseDTO;
 import com.example.youtube.dto.tag.TagUpdateDTO;
-import com.example.youtube.entity.tag.TagEntity;
 import com.example.youtube.enums.Language;
-import com.example.youtube.exps.TagNotFound;
-import com.example.youtube.repository.tag.TagRepository;
+import com.example.youtube.repository.TagRepository;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,7 +21,7 @@ public class TagService {
 
 
     public TagResponseDTO create(TagCreateDTO dto) {
-        TagEntity tagEntity = new TagEntity();
+        com.example.youtube.entity.tag.TagEntity tagEntity = new com.example.youtube.entity.tag.TagEntity();
         if (!dto.getName().startsWith("#")) {
             tagEntity.setName("#" + dto.getName());
         } else {
@@ -43,14 +40,14 @@ public class TagService {
     }
 
     public Boolean updateById(Integer id, TagUpdateDTO tagUpdateDTO, Language language) {
-        Optional<TagEntity> byId = tagRepository.findById(id);
+        Optional<com.example.youtube.entity.tag.TagEntity> byId = tagRepository.findById(id);
 
 //        if (byId.isEmpty()) {
 //            log.warn("Tag not found: {}", id);
 //            throw new TagNotFound(resourceBundleService.getMessage("tag.not.found", String.valueOf(language)));
 //        }
 
-        TagEntity tagEntity = byId.get();
+        com.example.youtube.entity.tag.TagEntity tagEntity = byId.get();
         if (!tagUpdateDTO.getName().startsWith("#")) {
             tagEntity.setName("#" + tagUpdateDTO.getName());
         } else {
@@ -62,7 +59,7 @@ public class TagService {
     }
 
     public Boolean deleteById(Integer id, Language language) {
-        Optional<TagEntity> byId = tagRepository.findById(id);
+        Optional<com.example.youtube.entity.tag.TagEntity> byId = tagRepository.findById(id);
 
 //        if (byId.isEmpty()) {
 //            log.warn("Tag not found: {}", id);
@@ -74,10 +71,10 @@ public class TagService {
     }
 
     public List<TagResponseDTO> tagList() {
-        Iterable<TagEntity> all = tagRepository.findAll();
+        Iterable<com.example.youtube.entity.tag.TagEntity> all = tagRepository.findAll();
 
         List<TagResponseDTO> result = new ArrayList<>();
-        for (TagEntity tagEntity : all) {
+        for (com.example.youtube.entity.tag.TagEntity tagEntity : all) {
             TagResponseDTO response = new TagResponseDTO();
             response.setId(tagEntity.getId());
             response.setName(tagEntity.getName());

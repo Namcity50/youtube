@@ -6,3 +6,12 @@ Content-Type: application/json
 {
   "name": "Java Uz"
 }
+
+### update channel photo
+PUT localhost:8080/api/v1/channel/private/update/c92b898d-2664-4a32-b0cc-16fa892d5e8e
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMzQ5NzgsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2Q5M0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDIxMzc4LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.H8_job6PShj1CHt7ezxSpKlCIsWzNwO1Wvbph8xWxyk8JvTTI719vNKko3NQu59T5mRGmBSfV-mhOVq1j2pA-w
+
+
+### update channel banner
+PUT localhost:8080/api/v1/channel/private/updateBanner/94cfad48-1d35-4ed0-816c-ca6d99acb42e
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMzQ5NzgsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2Q5M0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDIxMzc4LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.H8_job6PShj1CHt7ezxSpKlCIsWzNwO1Wvbph8xWxyk8JvTTI719vNKko3NQu59T5mRGmBSfV-mhOVq1j2pA-w
