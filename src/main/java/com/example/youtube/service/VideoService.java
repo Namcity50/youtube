@@ -131,7 +131,7 @@ public class VideoService {
         VideShortInfoDTO dto = new VideShortInfoDTO();
         dto.setId(entity.getId());
         dto.setTitle(entity.getTitle());
-        dto.setPreview_attach(attachService.getAttachLink(entity.getAttachId()));
+        dto.setPreview_attach(attachService.getAttachLink2(entity.getAttachId()));
         return dto;
     }
 }

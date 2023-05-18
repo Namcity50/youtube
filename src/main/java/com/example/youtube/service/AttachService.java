@@ -156,4 +156,7 @@ public class AttachService {
 
     }
 
+    public AttachDTO getAttachLink2(String attachId) {
+        return null;
+    }
 }
