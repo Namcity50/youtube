@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface ChannelRepository extends JpaRepository<ChannelEntity,UUID> {
+public interface ChannelRepository extends JpaRepository<ChannelEntity,String> {
     ChannelEntity findByProfileIdAndStatus(Integer profileId,GeneralStatus status);
     @Modifying
     @Transactional
@@ -24,5 +24,5 @@ public interface ChannelRepository extends JpaRepository<ChannelEntity,UUID> {
     @Transactional
     @Query("update ChannelEntity set status=?1  where id = ?2 ")
     void updateStatus(GeneralStatus channelStatus, UUID channelId);
-    Optional<ChannelEntity> findByIdAndStatus(UUID id, GeneralStatus status);
+    Optional<ChannelEntity> findByIdAndStatus(String id, GeneralStatus status);
 }

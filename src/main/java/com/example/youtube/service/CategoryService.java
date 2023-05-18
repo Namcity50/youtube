@@ -19,11 +19,10 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public Integer create(CategoryDTO dto, Integer jwtId) {
+    public Integer create(CategoryDTO dto) {
         CategoryEntity entity = new CategoryEntity();
 
         entity.setName(dto.getName());
-        entity.setPrtId(jwtId);
         categoryRepository.save(entity);
         dto.setId(entity.getId());
         return entity.getId();
@@ -45,8 +44,8 @@ public class CategoryService {
         return optional.get();
     }
 
-    public Boolean delete(Integer id, Integer jwtId) {
-       categoryRepository.updateVisible(id,jwtId);
+    public Boolean delete(Integer id) {
+       categoryRepository.updateVisible(id);
        return true;
     }
 

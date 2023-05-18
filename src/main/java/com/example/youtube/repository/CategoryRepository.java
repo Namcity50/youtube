@@ -13,6 +13,6 @@ public interface CategoryRepository extends CrudRepository<CategoryEntity,Intege
 
     @Transactional
     @Modifying
-    @Query("update CategoryEntity  set visible = false , prtId =:prtId where id =:id")
-    int updateVisible(@Param("id") Integer id, @Param("prtId") Integer prtId);
+    @Query("update CategoryEntity  set visible = false where id =:id")
+    int updateVisible(@Param("id") Integer id);
 }

@@ -15,39 +15,29 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class CategoryController {
     private final CategoryService categoryService;
-    @PostMapping({"", "/"})
-    public ResponseEntity<?> create(@RequestBody CategoryDTO dto,
-                                          HttpServletRequest request) {
-        JwtUtil.checkForRequiredRole(request, ProfileRole.ROLE_ADMIN);
-        Integer jwtId = (Integer) request.getAttribute("id");
-        return ResponseEntity.ok(categoryService.create(dto, jwtId));
+    @PostMapping("/private/admin/create")
+    public ResponseEntity<?> create(@RequestBody CategoryDTO dto) {
+        return ResponseEntity.ok(categoryService.create(dto));
     }
 
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/private/admin/update/{id}")
     public ResponseEntity<Boolean> update(@PathVariable("id") Integer id,
-                                          @RequestBody CategoryDTO dto,
-                                          HttpServletRequest request) {
-        JwtUtil.checkForRequiredRole(request, ProfileRole.ROLE_ADMIN);
-        Integer jwtId = (Integer) request.getAttribute("id");
+                                          @RequestBody CategoryDTO dto) {
         return ResponseEntity.ok(categoryService.update(id, dto));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id,
-                                          HttpServletRequest request) {
-        JwtUtil.checkForRequiredRole(request, ProfileRole.ROLE_ADMIN);
-        Integer jwtId = (Integer) request.getAttribute("id");
-        return ResponseEntity.ok(categoryService.delete(id, jwtId));
+    @DeleteMapping("/private/admin/delete/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(categoryService.delete(id));
     }
 
     @GetMapping("/getAll")
     public ResponseEntity<Page<CategoryDTO>> getAll(@RequestParam(value = "page", defaultValue = "1") int page,
-                                                    @RequestParam(value = "size", defaultValue = "2") int size,
-                                                    HttpServletRequest request) {
-        JwtUtil.checkForRequiredRole(request, ProfileRole.ROLE_ADMIN);
-        Integer jwtId = (Integer) request.getAttribute("id");
+                                                    @RequestParam(value = "size", defaultValue = "2") int size) {
         return ResponseEntity.ok(categoryService.getAll(page, size));
     }
+
+
 
 }

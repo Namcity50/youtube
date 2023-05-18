@@ -1,0 +1,24 @@
+### tag create
+POST localhost:8080/api/v1/tag/public/create
+Content-Type: application/json
+
+{
+  "name": "rusvsukr"
+}
+
+### update tag
+POST localhost:8080/api/v1/tag/private/admin/update/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzOTMwOTIsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDQ3OTQ5MiwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.s1fDz6RufIZ96PJ4w2PVJT2dIUUGGH6D1uOFvQ_7uzjqHBQZUiLUCxOvk3vueDH7ze8XjekaP18knNanAMLlkQ
+Content-Type: application/json
+
+{
+  "name": "UZB"
+}
+
+### delete by id
+DELETE localhost:8080/api/v1/tag/private/admin/delete/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzOTMwOTIsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDQ3OTQ5MiwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.s1fDz6RufIZ96PJ4w2PVJT2dIUUGGH6D1uOFvQ_7uzjqHBQZUiLUCxOvk3vueDH7ze8XjekaP18knNanAMLlkQ
+
+
+### tag list
+GET localhost:8080/api/v1/tag/public/list

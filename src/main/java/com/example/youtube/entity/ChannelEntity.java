@@ -1,5 +1,6 @@
 package com.example.youtube.entity;
 
+
 import com.example.youtube.enums.GeneralStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.UUID;
 public class ChannelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private String id;
     @Column(name = "name")
     private String name;
     @Column(name = "description", columnDefinition = " text ")
@@ -39,3 +40,4 @@ public class ChannelEntity {
     private Integer profileId;
 
 }
+

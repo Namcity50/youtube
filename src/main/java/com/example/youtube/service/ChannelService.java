@@ -114,12 +114,12 @@ public class ChannelService {
     }
 
     public ChannelEntity getByIdAndStatus(String id) {
-        return channelRepository.findByIdAndStatus(UUID.fromString(id), GeneralStatus.ROLE_ACTIVE).orElseThrow(() -> {
+        return channelRepository.findByIdAndStatus(id, GeneralStatus.ROLE_ACTIVE).orElseThrow(() -> {
             throw new ItemNotFoundException("Channel not found");
         });
     }
     public ChannelEntity getById(String id) {
-        return channelRepository.findById(UUID.fromString(id)).orElseThrow(() -> {
+        return channelRepository.findById(id).orElseThrow(() -> {
             throw new ItemNotFoundException("Channel not found");
         });
     }

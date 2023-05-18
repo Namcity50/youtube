@@ -8,8 +8,9 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class TagResponseDTO {
+public class TagDTO {
     private Integer id;
+    @NotBlank(message = "Name required")
     private String name;
     private LocalDateTime createdDate;
 
