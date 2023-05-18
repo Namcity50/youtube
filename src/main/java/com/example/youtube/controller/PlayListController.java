@@ -1,6 +1,6 @@
 package com.example.youtube.controller;
 
-import com.example.youtube.dto.PlaylistDTO;
+import com.example.youtube.dto.playList.PlaylistDTO;
 import com.example.youtube.service.PlayListService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
