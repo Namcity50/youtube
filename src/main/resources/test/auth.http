@@ -5,8 +5,8 @@ Content-Type:  application/json
 {
   "name": "Elmurod",
   "surname": "Saydaliyev",
-  "email": "muysinovmuxsinbek@gmail.com",
-  "password": "222222"
+  "email": "saydaliyevelmurod93@gmail.com",
+  "password": "elmurod2203"
 }
 
 ### Login
@@ -15,7 +15,7 @@ Content-Type:  application/json
 
 {
 
-  "email": "muxsinbekmuysinov@gmail.com",
-  "password": "123456"
+  "email": "saydaliyevelmurod93@gmail.com",
+  "password": "elmurod2203"
 
 }
