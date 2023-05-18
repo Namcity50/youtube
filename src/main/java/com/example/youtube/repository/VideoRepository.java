@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface VideoRepository extends CrudRepository<VideoEntity,String>, PagingAndSortingRepository<VideoEntity,String> {
 
-    @Query("update VideoEntity set view_count=:view_count+1 where id=:id")
+    @Query("update VideoEntity set viewCount=:view_count+1 where id=:id")
     List<VideoEntity> findByIdAndViewCount(@Param("id") String id);
 
 

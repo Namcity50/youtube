@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 public class VideoDTO {
     private String id;
-    private Integer preview_attach_id;
+    private String preview_attach_id;
     private String title;
     private Integer categoryId;
     private String attachId;

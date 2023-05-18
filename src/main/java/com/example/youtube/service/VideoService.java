@@ -30,17 +30,17 @@ public class VideoService {
 
     public VideoDTO create(VideoDTO dto) {
         VideoEntity entity = new VideoEntity();
-        entity.setPreview_attach_id(dto.getPreview_attach_id());
+        entity.setPreviewAttachId(dto.getPreview_attach_id());
         entity.setTitle(dto.getTitle());
         entity.setCategoryId(dto.getCategoryId());
         entity.setAttachId(dto.getAttachId());
         entity.setType(dto.getType());
-        entity.setView_count(dto.getView_count());
-        entity.setShared_count(dto.getShared_count());
+        entity.setViewCount(dto.getView_count());
+        entity.setSharedCount(dto.getShared_count());
         entity.setDescription(dto.getDescription());
-        entity.setChannelId(UUID.fromString(dto.getChannelId()));
-        entity.setLike_count(dto.getLike_count());
-        entity.setDislike_count(dto.getDislike_count());
+        entity.setChannelId((dto.getChannelId()));
+        entity.setLikeCount(dto.getLike_count());
+        entity.setDislikeCount(dto.getDislike_count());
         videoRepository.save(entity);
         dto.setId(entity.getId());
         return dto;
@@ -53,18 +53,18 @@ public class VideoService {
             throw new ItemNotFoundException(" vioes not found!!!");
         }
         VideoEntity entity = get(id);
-        entity.setPreview_attach_id(dto.getPreview_attach_id());
+        entity.setPreviewAttachId(dto.getPreview_attach_id());
         entity.setTitle(dto.getTitle());
         entity.setCategoryId(dto.getCategoryId());
         entity.setAttachId(dto.getAttachId());
         entity.setType(VideoType.VIDEO);
         entity.setStatus(VideoStatus.PUBLIC);
-        entity.setView_count(dto.getView_count());
-        entity.setShared_count(dto.getShared_count());
+        entity.setViewCount(dto.getView_count());
+        entity.setSharedCount(dto.getShared_count());
         entity.setDescription(dto.getDescription());
-        entity.setChannelId(UUID.fromString(dto.getChannelId()));
-        entity.setLike_count(dto.getLike_count());
-        entity.setDislike_count(dto.getDislike_count());
+        entity.setChannelId((dto.getChannelId()));
+        entity.setLikeCount(dto.getLike_count());
+        entity.setDislikeCount(dto.getDislike_count());
         videoRepository.save(entity);
         dto.setId(entity.getId());
         return dto;
@@ -95,18 +95,18 @@ public class VideoService {
     public VideoDTO IncreaseViewCount(String id, VideoDTO dto) {
         List<VideoEntity> list = videoRepository.findByIdAndViewCount(id);
         list.forEach(entity -> {
-            entity.setPreview_attach_id(dto.getPreview_attach_id());
+            entity.setPreviewAttachId(dto.getPreview_attach_id());
             entity.setTitle(dto.getTitle());
             entity.setCategoryId(dto.getCategoryId());
             entity.setAttachId(dto.getAttachId());
             entity.setType(VideoType.VIDEO);
             entity.setStatus(VideoStatus.PUBLIC);
-            entity.setView_count(dto.getView_count());
-            entity.setShared_count(dto.getShared_count());
+            entity.setViewCount(dto.getView_count());
+            entity.setSharedCount(dto.getShared_count());
             entity.setDescription(dto.getDescription());
-            entity.setChannelId(UUID.fromString(dto.getChannelId()));
-            entity.setLike_count(dto.getLike_count());
-            entity.setDislike_count(dto.getDislike_count());
+            entity.setChannelId((dto.getChannelId()));
+            entity.setLikeCount(dto.getLike_count());
+            entity.setDislikeCount(dto.getDislike_count());
             videoRepository.save(entity);
             dto.setId(entity.getId());
         });
