@@ -4,10 +4,7 @@ import com.example.youtube.dto.PlaylistDTO;
 import com.example.youtube.service.PlayListService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/playList")
@@ -18,5 +15,11 @@ public class PlayListController {
     @PostMapping("/private/create")
     public ResponseEntity<PlaylistDTO> create(@RequestBody PlaylistDTO dto){
         return ResponseEntity.ok(playListService.create(dto));
+    }
+
+    @PutMapping("/private/update")
+    public ResponseEntity<PlaylistDTO> update(@RequestBody PlaylistDTO dto){
+        //return ResponseEntity.ok(playListService.update(dto));
+        return null;
     }
 }
