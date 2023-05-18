@@ -13,7 +13,5 @@ public class VideShortInfoDTO {
     private String title;
     private AttachDTO preview_attach;      //(id, url),
     private LocalDateTime published_date;
-    private 
-    published_date, channel(id,name,photo(url)),
-    view_count,duration)
+
 }

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -20,14 +21,14 @@ public class VideoEntity {
     private Integer preview_attach_id;
     @Column(name = "title")
     private String title;
-    @JoinColumn(name = "category_id")
+    @Column(name = "category_id")
     private Integer categoryId;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id",insertable = false,updatable = false)
     private CategoryEntity category;
     @Column(name = "attach_id")
     private String attachId;
-    @Column(name = "cteated_date")
+    @Column(name = "created_date")
     private LocalDateTime created_date = LocalDateTime.now();
     @Column(name = "published_date")
     private LocalDateTime published_date;
@@ -40,9 +41,9 @@ public class VideoEntity {
     @Column(name = "description")
     private String description;
     @Column(name = "channel_id")
-    private String channelId;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "channel_id")
+    private UUID channelId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "channel_id",insertable = false,updatable = false)
     private ChannelEntity channel;
     @Column(name = "like_count")
     private Integer like_count;

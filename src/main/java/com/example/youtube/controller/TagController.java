@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class TagController {
     private final TagService tagService;
-
-    @PostMapping("/private/")
-    public ResponseEntity<?> create(@RequestBody @Valid TagDTO dto) {
+    @PostMapping("/public/create")
+    public ResponseEntity<?> create(@RequestBody  TagDTO dto) {
         return ResponseEntity.ok(tagService.create(dto));
     }
 

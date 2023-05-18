@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -30,7 +31,7 @@ public class VideoService {
         entity.setView_count(dto.getView_count());
         entity.setShared_count(dto.getShared_count());
         entity.setDescription(dto.getDescription());
-        entity.setChannelId(dto.getChannelId());
+        entity.setChannelId(UUID.fromString(dto.getChannelId()));
         entity.setLike_count(dto.getLike_count());
         entity.setDislike_count(dto.getDislike_count());
         videoRepository.save(entity);
@@ -54,7 +55,7 @@ public class VideoService {
         entity.setView_count(dto.getView_count());
         entity.setShared_count(dto.getShared_count());
         entity.setDescription(dto.getDescription());
-        entity.setChannelId(dto.getChannelId());
+        entity.setChannelId(UUID.fromString(dto.getChannelId()));
         entity.setLike_count(dto.getLike_count());
         entity.setDislike_count(dto.getDislike_count());
         videoRepository.save(entity);
@@ -96,7 +97,7 @@ public class VideoService {
             entity.setView_count(dto.getView_count());
             entity.setShared_count(dto.getShared_count());
             entity.setDescription(dto.getDescription());
-            entity.setChannelId(dto.getChannelId());
+            entity.setChannelId(UUID.fromString(dto.getChannelId()));
             entity.setLike_count(dto.getLike_count());
             entity.setDislike_count(dto.getDislike_count());
             videoRepository.save(entity);
