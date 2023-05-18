@@ -39,8 +39,8 @@ public class ProfileEntity {
     @JoinColumn(name = "attach")
     private AttachEntity attachEntity;
 
-    @Column(name = "attach_id")
-    private String attachId;
+    @Column(name = "photo_id")
+    private String photoId;
 
 
 

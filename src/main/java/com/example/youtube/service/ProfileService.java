@@ -120,4 +120,10 @@ public class ProfileService {
         ProfileEntity entity = optional.get();
         return entity;
     }
+
+    public ProfileEntity getById(Integer profileId) {
+        return profileRepository.findById(profileId).orElseThrow(()->{
+            throw new ItemNotFoundException("Profile not found");
+        });
+    }
 }

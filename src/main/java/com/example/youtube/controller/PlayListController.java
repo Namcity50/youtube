@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/playList")
+@RequestMapping("/api/v1/playlist")
 @AllArgsConstructor
 public class PlayListController {
     private final PlayListService playListService;
@@ -24,9 +24,8 @@ public class PlayListController {
     }
 
     @PutMapping("/private/user/changeStatus")
-    public ResponseEntity<Boolean> updateStatus(@RequestParam("id") Integer id,
-                                                @RequestParam("status") String status){
-        return ResponseEntity.ok(playListService.updateStatus(id,status));
+    public ResponseEntity<Boolean> updateStatus(@RequestParam("id") Integer id){
+        return ResponseEntity.ok(playListService.updateStatus(id));
     }
     @DeleteMapping("/private/delete")
     public ResponseEntity<Boolean> delete(@RequestParam("id") Integer id ){
