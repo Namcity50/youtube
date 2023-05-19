@@ -4,7 +4,7 @@ package com.example.youtube.service.tag;
 import com.example.youtube.dto.tag.videoTag.VideoTagDTO;
 import com.example.youtube.dto.tag.videoTag.VideoTagInfoDTO;
 import com.example.youtube.dto.tag.videoTag.VideoTagResponseDTO;
-import com.example.youtube.entity.tag.VideoTagEntity;
+import com.example.youtube.entity.VideoTagEntity;
 import com.example.youtube.enums.Language;
 import com.example.youtube.exps.VideException;
 import com.example.youtube.repository.tag.VideoTagRepository;

@@ -1,6 +1,6 @@
 package com.example.youtube.repository.tag;
 
-import com.example.youtube.entity.tag.VideoTagEntity;
+import com.example.youtube.entity.VideoTagEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

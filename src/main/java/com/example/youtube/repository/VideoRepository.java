@@ -18,6 +18,7 @@ public interface VideoRepository extends CrudRepository<VideoEntity, String>, Pa
             " new com.example.youtube.entity.ChannelEntity(v.channelId,v.channel.name,v.channel.photoId)," +
             "v.viewCount ) from VideoEntity as v where v.categoryId = ?1 ")
     Page<VideoEntity> findAllByCategoryId(Integer id, Pageable pageable);
+
     @Query("from VideoEntity where attachId = ?1 and channelId =?2 ")
     VideoEntity getByAttachAndChannel(String attachId, String channelId);
 
@@ -38,4 +39,10 @@ public interface VideoRepository extends CrudRepository<VideoEntity, String>, Pa
             " new com.example.youtube.entity.ChannelEntity(v.channelId,v.channel.name,v.channel.photoId)," +
             "v.viewCount ) from VideoEntity as v where v.title ilike ?1 ")
     Page<VideoEntity> findAllByTitle(String text, Pageable pageable);
+
+    @Query(value = "select new com.example.youtube.entity.VideoEntity (v.id ,v.title,v.previewAttachId,v.publishedDate," +
+            " new com.example.youtube.entity.ChannelEntity(v.channelId,v.channel.name,v.channel.photoId)," +
+            "v.viewCount ) from VideoEntity as v inner join VideoTagEntity as vt on vt.videoId=v.id " +
+            " where vt.tagId=?1")
+    Page<VideoEntity> findByTagId(Integer tagId, Pageable pageable);
 }

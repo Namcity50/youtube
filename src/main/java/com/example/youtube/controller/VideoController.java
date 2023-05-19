@@ -46,6 +46,12 @@ public class VideoController {
                                               @RequestParam(value = "text") String text) {
         return ResponseEntity.ok(videoService.pagingByTitle(page, size, text));
     }
+    @GetMapping("/public/tag/{id}")
+    public ResponseEntity<?> pagingByTag(@RequestParam(value = "page", defaultValue = "1") int page,
+                                           @RequestParam(value = "size", defaultValue = "10") int size,
+                                           @PathVariable(value = "id") Integer tagId) {
+        return ResponseEntity.ok(videoService.pagingByTag(page, size, tagId));
+    }
 
 
 }

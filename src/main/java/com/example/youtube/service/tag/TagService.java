@@ -1,6 +1,7 @@
 package com.example.youtube.service.tag;
 
 import com.example.youtube.dto.tag.TagDTO;
+import com.example.youtube.entity.TagEntity;
 import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.repository.TagRepository;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import com.example.youtube.entity.tag.TagEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

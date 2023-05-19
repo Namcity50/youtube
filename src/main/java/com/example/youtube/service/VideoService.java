@@ -159,4 +159,16 @@ public class VideoService {
         return new PageImpl<>(list, pageable, totalElements);
 
     }
+
+    public Object pagingByTag(int page, int size, Integer tagId) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<VideoEntity> videoEntityPage = videoRepository.findByTagId(tagId, pageable);
+        long totalElements = videoEntityPage.getTotalElements();
+        List<VideoShortInfoDTO> list = new LinkedList<>();
+        videoEntityPage.getContent().forEach(content -> {
+            list.add(toVideoShortInfo(content));
+        });
+        return new PageImpl<>(list, pageable, totalElements);
+
+    }
 }
