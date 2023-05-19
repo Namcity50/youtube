@@ -46,6 +46,7 @@ public class VideoService {
         entity.setCategoryId(dto.getCategoryId());
         entity.setAttachId(dto.getAttachId());
         entity.setType(VideoType.VIDEO);
+        entity.setStatus(VideoStatus.PUBLIC);
         entity.setDescription(dto.getDescription());
         entity.setChannelId(channel.getId());
         entity.setViewCount(0);
@@ -72,6 +73,7 @@ public class VideoService {
         videoDTO.setChannelId(entity.getChannelId());
         videoDTO.setLikeCount(entity.getLikeCount());
         videoDTO.setDislikeCount(entity.getDislikeCount());
+        videoDTO.setStatus(entity.getStatus());
         return videoDTO;
 
     }
@@ -91,20 +93,21 @@ public class VideoService {
         return toDTO(entity);
     }
 
-    //
-//    public VideoDTO changeStatus(String id, VideoDTO dto) {
-//        Integer profileId = SpringSecurityUtil.getProfileId();
-//        VideoEntity vId = get(id);
-//        if (!profileId.equals(vId)) {
-//            throw new ItemNotFoundException(" videos not found!!!");
-//        }
-//        VideoEntity entity = new VideoEntity();
-//        entity.setStatus(VideoStatus.PUBLIC);
-//        videoRepository.save(entity);
-//        dto.setId(entity.getId());
-//        return dto;
-//    }
-//
+
+    public VideoDTO changeStatus(String id) {
+        Integer profileId = SpringSecurityUtil.getProfileId();
+        VideoEntity videoEntity = getById(id);
+        if (!profileId.equals(videoEntity.getChannel().getProfileId())) {
+            throw new ItemNotFoundException(" This video belong to other profile");
+        }
+        VideoStatus status;
+        if (videoEntity.getStatus().equals(VideoStatus.PRIVATE)) status = VideoStatus.PUBLIC;
+        else status = VideoStatus.PRIVATE;
+        videoRepository.changeStatus(status, videoEntity.getId());
+        videoEntity.setStatus(status);
+        return toDTO(videoEntity);
+    }
+
     public VideoEntity getById(String id) {
         Optional<VideoEntity> optional = videoRepository.findById(id);
         if (optional.isEmpty()) {

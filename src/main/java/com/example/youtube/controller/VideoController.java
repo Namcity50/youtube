@@ -22,12 +22,11 @@ public class VideoController {
                                     @RequestBody VideoUpdateDTO dto) {
         return ResponseEntity.ok().body(videoService.update(id,dto));
     }
-//
-//    @PutMapping("/private/user/changeVideoStatus/{id}")
-//    public ResponseEntity<?> changeStatus(@PathVariable("id")String id,
-//                                          @RequestBody VideoDTO dto) {
-//        return ResponseEntity.ok().body(videoService.changeStatus(id,dto));
-//    }
+
+    @PutMapping("/private/status/{id}")
+    public ResponseEntity<?> changeStatus(@PathVariable("id")String id) {
+        return ResponseEntity.ok().body(videoService.changeStatus(id));
+    }
 //
 //    @PutMapping("/private/admin/IncreaseViewCount/{id}")
 //    public ResponseEntity<?> IncreaseViewCount(@PathVariable("id")String id,

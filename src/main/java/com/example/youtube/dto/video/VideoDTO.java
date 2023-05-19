@@ -1,5 +1,6 @@
 package com.example.youtube.dto.video;
 
+import com.example.youtube.enums.VideoStatus;
 import com.example.youtube.enums.VideoType;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
@@ -25,4 +26,5 @@ public class VideoDTO {
     private String channelId;
     private Integer likeCount;
     private Integer dislikeCount;
+    private VideoStatus status;
 }
