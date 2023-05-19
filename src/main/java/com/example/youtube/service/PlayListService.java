@@ -120,11 +120,11 @@ public class PlayListService {
         dto.setOrder_num(entity.getOrderNumber());
         dto.setChannel(new ChannelPlayListInfoDTO(entity.getChannelId(), entity.getChannelName(),
                 new AttachPlayListInfoDTO(entity.getChannelId(),
-                        attachService.getAttachLink(entity.getChanPhotoId()))));
+                        attachService.getAttachByLink(entity.getChanPhotoId()))));
         dto.setProfile(new ProfilePlayListInfoDTO(entity.getProfileId(), entity.getProfileName(),
                 entity.getProfileSurname(),
                 new AttachPlayListInfoDTO(entity.getProPhotoId(),
-                        attachService.getAttachLink(entity.getProPhotoId()))));
+                        attachService.getAttachByLink(entity.getProPhotoId()))));
         return dto;
     }
 }

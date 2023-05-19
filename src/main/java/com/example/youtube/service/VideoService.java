@@ -1,9 +1,7 @@
 package com.example.youtube.service;
 
-import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.dto.video.VideShortInfoDTO;
 import com.example.youtube.dto.video.VideoDTO;
-import com.example.youtube.entity.ProfileEntity;
 import com.example.youtube.entity.VideoEntity;
 import com.example.youtube.enums.VideoStatus;
 import com.example.youtube.enums.VideoType;
@@ -20,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -131,7 +128,7 @@ public class VideoService {
         VideShortInfoDTO dto = new VideShortInfoDTO();
         dto.setId(entity.getId());
         dto.setTitle(entity.getTitle());
-        dto.setPreview_attach(attachService.getAttachLink2(entity.getAttachId()));
+        dto.setPreview_attach(attachService.getAttachLink(entity.getAttachId()));
         return dto;
     }
 }

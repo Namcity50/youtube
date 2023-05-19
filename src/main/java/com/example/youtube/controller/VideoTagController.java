@@ -1,10 +1,13 @@
 package com.example.youtube.controller;
 
 import com.example.youtube.dto.video.VideoTagDTO;
+import com.example.youtube.dto.video.VideoTagResponseDTO;
 import com.example.youtube.service.VideoTagService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/videotag")
@@ -20,5 +23,9 @@ public class VideoTagController {
     private ResponseEntity<Boolean> delete(@RequestParam("tId") Integer tagId,
                                            @RequestParam("vId") String videoId){
         return ResponseEntity.ok(videoTagService.delete(tagId,videoId));
+    }
+    @GetMapping("private/getByTagList")
+    public ResponseEntity<List<VideoTagResponseDTO>> getByVideoTagList(@RequestParam("id") String id){
+        return ResponseEntity.ok(videoTagService.getByVideoTagList(id));
     }
 }

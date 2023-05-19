@@ -18,5 +18,5 @@ public class VideoTagEntity {
     @Column(name = "tag_id")
     private Integer tagId;
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 }
