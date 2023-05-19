@@ -2,7 +2,7 @@
 
 ### create video
 POST localhost:8080/api/v1/video/private/create
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMzQ5NzgsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2Q5M0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDIxMzc4LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.H8_job6PShj1CHt7ezxSpKlCIsWzNwO1Wvbph8xWxyk8JvTTI719vNKko3NQu59T5mRGmBSfV-mhOVq1j2pA-w
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0Nzk4NTQsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2Q5M0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NTY2MjU0LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.Bhu7WKzc1JH2MAIkXp8WhkN_n5N9hO2D5da_FenEV4l8odrJfz3IWVkPFUX-cvDzQ1tspYGvwpyRIjkdnsLe9g
 Content-Type:  application/json
 
 {
@@ -12,9 +12,14 @@ Content-Type:  application/json
 
 
 ### update video
-PUT localhost:8080/api/v1/video/private/user/update/
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMjg3OTYsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWszM0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDE1MTk2LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.ikXJpLlq5mN3QyuQtJLr822Txzizz8pYFBzdnTdVD6L7v86-1Ov_B9oz4QqXO48hIIKA61OdIwMYZqKPYQcDFw
+PUT localhost:8080/api/v1/video/private/update/b24a4737-4439-402f-a702-d74faf1eb0f3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0Nzk4NTQsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2Q5M0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NTY2MjU0LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.Bhu7WKzc1JH2MAIkXp8WhkN_n5N9hO2D5da_FenEV4l8odrJfz3IWVkPFUX-cvDzQ1tspYGvwpyRIjkdnsLe9g
 Content-Type:  application/json
+
+{
+  "title": "Code uz brain academy",
+  "description": "Brain academyda java kurslari"
+}
 
 
 ### change videoStatus

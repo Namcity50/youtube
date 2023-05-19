@@ -3,6 +3,7 @@ package com.example.youtube.service;
 import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.dto.video.VideShortInfoDTO;
 import com.example.youtube.dto.video.VideoDTO;
+import com.example.youtube.dto.video.VideoUpdateDTO;
 import com.example.youtube.entity.ChannelEntity;
 import com.example.youtube.entity.ProfileEntity;
 import com.example.youtube.entity.VideoEntity;
@@ -44,7 +45,7 @@ public class VideoService {
         entity.setTitle(dto.getTitle());
         entity.setCategoryId(dto.getCategoryId());
         entity.setAttachId(dto.getAttachId());
-        entity.setType(dto.getType());
+        entity.setType(VideoType.VIDEO);
         entity.setDescription(dto.getDescription());
         entity.setChannelId(channel.getId());
         entity.setViewCount(0);
@@ -75,7 +76,7 @@ public class VideoService {
 
     }
 
-    public VideoDTO update(String id, VideoDTO dto) {
+    public VideoDTO update(String id, VideoUpdateDTO dto) {
         Integer profileId = SpringSecurityUtil.getProfileId();
         VideoEntity entity = getById(id);
         if (entity.getChannel().getProfileId() != profileId) {
@@ -84,17 +85,10 @@ public class VideoService {
         entity.setPreviewAttachId(dto.getPreviewAttachId());
         entity.setTitle(dto.getTitle());
         entity.setCategoryId(dto.getCategoryId());
-//        entity.setType(VideoType.VIDEO);
-        entity.setStatus(VideoStatus.PUBLIC);
-        entity.setViewCount(dto.getViewCount());
-        entity.setSharedCount(dto.getSharedCount());
         entity.setDescription(dto.getDescription());
-//        entity.setChannelId((dto.getChannelId()));
-        entity.setLikeCount(dto.getLikeCount());
-        entity.setDislikeCount(dto.getDislikeCount());
-        videoRepository.save(entity);
-        dto.setId(entity.getId());
-        return dto;
+        entity = videoRepository.save(entity);
+
+        return toDTO(entity);
     }
 
     //

@@ -1,6 +1,7 @@
 package com.example.youtube.controller;
 
 import com.example.youtube.dto.video.VideoDTO;
+import com.example.youtube.dto.video.VideoUpdateDTO;
 import com.example.youtube.service.VideoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class VideoController {
 
     @PutMapping("/private/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")String id,
-                                    @RequestBody VideoDTO dto) {
+                                    @RequestBody VideoUpdateDTO dto) {
         return ResponseEntity.ok().body(videoService.update(id,dto));
     }
 //
