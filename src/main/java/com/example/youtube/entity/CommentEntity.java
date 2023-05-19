@@ -14,11 +14,15 @@ public class CommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_id",updatable = false,insertable = false)
+    private ProfileEntity profile;
+    @Column(name = "profile_id")
     private Integer profile_id;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "video_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "video_id",updatable = false,insertable = false)
+    private VideoEntity video;
+    @Column(name = "video_id")
     private String video_id;
     @Column(name = "content")
     private String content;

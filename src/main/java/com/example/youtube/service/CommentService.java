@@ -73,7 +73,7 @@ public class CommentService {
 
     public Page<CommentDTO> getPag(int page, int size, Integer id) {
         Pageable pageable = PageRequest.of(page - 1, size);
-        Page<CommentEntity> commentEntities = commentRepository.findAll(pageable, id);
+        Page<CommentEntity> commentEntities = commentRepository.findAll(pageable);
 
         long totalElements = commentEntities.getTotalElements();
         List<CommentEntity> contentList = commentEntities.getContent();
@@ -96,7 +96,8 @@ public class CommentService {
 
 
     public List<CommentDTO> getProfileById(Integer id) {
-        List<CommentEntity> listOfArticle = commentRepository.getProfileById(id);
+//        List<CommentEntity> listOfArticle = commentRepository.getProfileById(id);
+        List<CommentEntity> listOfArticle = null;
         List<CommentDTO> dtoList = new LinkedList<>();
         listOfArticle.forEach(entity -> {
             CommentDTO dto = new CommentDTO();

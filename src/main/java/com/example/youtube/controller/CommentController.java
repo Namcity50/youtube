@@ -37,7 +37,7 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getPag(page,size,id));
     }
 
-    @GetMapping("/public/getCategoryIdPaging")
+    @GetMapping("/public/getCategoryIdPaging/{id}")
     public ResponseEntity<?> getCategoryId(@PathVariable( "id")Integer id){
         return ResponseEntity.ok(commentService.getProfileById(id));
     }
