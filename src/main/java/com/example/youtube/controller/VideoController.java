@@ -12,34 +12,34 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class VideoController {
     private final VideoService videoService;
+
     @PostMapping("/private/create")
     public ResponseEntity<?> create(@RequestBody VideoDTO dto) {
         return ResponseEntity.ok().body(videoService.create(dto));
     }
 
     @PutMapping("/private/update/{id}")
-    public ResponseEntity<?> update(@PathVariable("id")String id,
+    public ResponseEntity<?> update(@PathVariable("id") String id,
                                     @RequestBody VideoUpdateDTO dto) {
-        return ResponseEntity.ok().body(videoService.update(id,dto));
+        return ResponseEntity.ok().body(videoService.update(id, dto));
     }
 
     @PutMapping("/private/status/{id}")
-    public ResponseEntity<?> changeStatus(@PathVariable("id")String id) {
+    public ResponseEntity<?> changeStatus(@PathVariable("id") String id) {
         return ResponseEntity.ok().body(videoService.changeStatus(id));
     }
-//
-//    @PutMapping("/private/admin/IncreaseViewCount/{id}")
-//    public ResponseEntity<?> IncreaseViewCount(@PathVariable("id")String id,
-//                                          @RequestBody VideoDTO dto) {
-//        return ResponseEntity.ok().body(videoService.IncreaseViewCount(id,dto));
-//    }
-//
-//    @GetMapping("/public/getCategoryIdPaging")
-//    public ResponseEntity<?> categoryIdPaging(@RequestParam(value = "page",defaultValue = "1")int page,
-//                                              @RequestParam(value = "size",defaultValue = "10")int size,
-//                                              @RequestParam(value = "id")Integer id){
-//        return ResponseEntity.ok(videoService.getArticleByCategoryIdPaging(page,size,id));
-//    }
+
+    @PutMapping("/private/view_c/{id}")
+    public ResponseEntity<?> increaseViewCount(@PathVariable("id") String id) {
+        return ResponseEntity.ok().body(videoService.increaseViewCount(id));
+    }
+
+    @GetMapping("/public/paging/{c_id}")
+    public ResponseEntity<?> pagingByCategory(@RequestParam(value = "page", defaultValue = "1") int page,
+                                              @RequestParam(value = "size", defaultValue = "10") int size,
+                                              @PathVariable(value = "c_id") Integer categoryId) {
+        return ResponseEntity.ok(videoService.pagingByCategory(page, size, categoryId));
+    }
 
 
 }

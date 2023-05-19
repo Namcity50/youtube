@@ -9,12 +9,12 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class VideShortInfoDTO {
+public class VideoShortInfoDTO {
     private String id;
     private String title;
-    private AttachDTO preview_attach;      //(id, url),
-    private LocalDateTime published_date;
+    private AttachDTO previewAttach;      //(id, url),
+    private LocalDateTime publishedDate;
     private ChannelDTO channelDTO; //channel(id,name,photo(url)),
-   private Integer  view_count;
+   private Integer  viewCount;
    private String duration;
 }

@@ -20,19 +20,19 @@ public class VideoEntity {
     @Column(name = "preview_attach_id")
     private String previewAttachId;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "preview_attach_id",insertable = false,updatable = false)
+    @JoinColumn(name = "preview_attach_id", insertable = false, updatable = false)
     private AttachEntity previewAttach;
     @Column(name = "title")
     private String title;
     @Column(name = "category_id")
     private Integer categoryId;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id",insertable = false,updatable = false)
+    @JoinColumn(name = "category_id", insertable = false, updatable = false)
     private CategoryEntity category;
     @Column(name = "attach_id")
     private String attachId;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attach_id",insertable = false,updatable = false)
+    @JoinColumn(name = "attach_id", insertable = false, updatable = false)
     private AttachEntity attach;
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
@@ -49,7 +49,7 @@ public class VideoEntity {
     @Column(name = "channel_id")
     private String channelId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "channel_id",insertable = false,updatable = false)
+    @JoinColumn(name = "channel_id", insertable = false, updatable = false)
     private ChannelEntity channel;
     @Column(name = "like_count")
     private Integer likeCount;
@@ -59,4 +59,15 @@ public class VideoEntity {
     @Column(name = "status")
     private VideoStatus status;
 
+    public VideoEntity() {
+    }
+
+    public VideoEntity(String id, String title, String previewAttachId, LocalDateTime publishedDate, ChannelEntity channel, Integer viewCount) {
+        this.id = id;
+        this.publishedDate = publishedDate;
+        this.previewAttachId = previewAttachId;
+        this.title = title;
+        this.viewCount = viewCount;
+        this.channel = channel;
+    }
 }

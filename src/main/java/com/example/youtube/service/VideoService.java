@@ -1,11 +1,11 @@
 package com.example.youtube.service;
 
 import com.example.youtube.dto.attach.AttachDTO;
-import com.example.youtube.dto.video.VideShortInfoDTO;
+import com.example.youtube.dto.channel.ChannelDTO;
+import com.example.youtube.dto.video.VideoShortInfoDTO;
 import com.example.youtube.dto.video.VideoDTO;
 import com.example.youtube.dto.video.VideoUpdateDTO;
 import com.example.youtube.entity.ChannelEntity;
-import com.example.youtube.entity.ProfileEntity;
 import com.example.youtube.entity.VideoEntity;
 import com.example.youtube.enums.VideoStatus;
 import com.example.youtube.enums.VideoType;
@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -115,48 +114,38 @@ public class VideoService {
         }
         return optional.get();
     }
-//
-//
-//    public VideoDTO IncreaseViewCount(String id, VideoDTO dto) {
-//        List<VideoEntity> list = videoRepository.findByIdAndViewCount(id);
-//        list.forEach(entity -> {
-//            entity.setPreviewAttachId(dto.getPreview_attach_id());
-//            entity.setTitle(dto.getTitle());
-//            entity.setCategoryId(dto.getCategoryId());
-//            entity.setAttachId(dto.getAttachId());
-//            entity.setType(VideoType.VIDEO);
-//            entity.setStatus(VideoStatus.PUBLIC);
-//            entity.setViewCount(dto.getView_count());
-//            entity.setSharedCount(dto.getShared_count());
-//            entity.setDescription(dto.getDescription());
-//            entity.setChannelId((dto.getChannelId()));
-//            entity.setLikeCount(dto.getLike_count());
-//            entity.setDislikeCount(dto.getDislike_count());
-//            videoRepository.save(entity);
-//            dto.setId(entity.getId());
-//        });
-//        return dto;
-//    }
-//
-//    public Page<VideShortInfoDTO> getArticleByCategoryIdPaging(int page, int size, Integer id) {
-//        Pageable pageable = PageRequest.of(page - 1, size);
-//        Page<VideoEntity> videoEntityPage = videoRepository.findAllByCategoryId(pageable, id);
-//
-//        long totalElements = videoEntityPage.getTotalElements();
-//        List<VideoEntity> contentList = videoEntityPage.getContent();
-//        List<VideShortInfoDTO> list = new LinkedList<>();
-//      contentList.forEach(content->{
-//          list.add(toVideoShortInfo(content));
-//      });
-//      return new PageImpl<>(list,pageable,totalElements);
-//    }
-//
-//
-//    public VideShortInfoDTO toVideoShortInfo(VideoEntity entity) {
-//        VideShortInfoDTO dto = new VideShortInfoDTO();
-//        dto.setId(entity.getId());
-//        dto.setTitle(entity.getTitle());
-//        dto.setPreview_attach(attachService.getAttachLink(entity.getAttachId()));
-//        return dto;
-//    }
+
+
+    public int increaseViewCount(String videoId) {
+        videoRepository.increaseViewCount(videoId);
+        return videoRepository.getViewCount(videoId);
+    }
+
+    public Page<VideoShortInfoDTO> pagingByCategory(int page, int size, Integer id) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<VideoEntity> videoEntityPage = videoRepository.findAllByCategoryId(id, pageable);
+        long totalElements = videoEntityPage.getTotalElements();
+        List<VideoEntity> contentList = videoEntityPage.getContent();
+        List<VideoShortInfoDTO> list = new LinkedList<>();
+        contentList.forEach(content -> {
+            list.add(toVideoShortInfo(content));
+        });
+        return new PageImpl<>(list, pageable, totalElements);
+    }
+
+    private VideoShortInfoDTO toVideoShortInfo(VideoEntity entity) {
+        VideoShortInfoDTO dto = new VideoShortInfoDTO();
+        dto.setId(entity.getId());
+        dto.setTitle(entity.getTitle());
+        String attachId = entity.getPreviewAttachId();
+        dto.setPreviewAttach(new AttachDTO(attachId, attachService.getAttachLink(attachId)));
+        dto.setPublishedDate(entity.getPublishedDate());
+        ChannelEntity channel = entity.getChannel();
+        dto.setChannelDTO(new ChannelDTO(channel.getId(), channel.getName(), attachService.getAttachLink(channel.getPhotoId())));
+        dto.setViewCount(entity.getViewCount());
+        return dto;
+
+    }
+
+
 }
