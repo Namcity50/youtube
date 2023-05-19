@@ -40,6 +40,12 @@ public class VideoController {
                                               @PathVariable(value = "c_id") Integer categoryId) {
         return ResponseEntity.ok(videoService.pagingByCategory(page, size, categoryId));
     }
+    @GetMapping("/public/title")
+    public ResponseEntity<?> pagingByTitle(@RequestParam(value = "page", defaultValue = "1") int page,
+                                              @RequestParam(value = "size", defaultValue = "10") int size,
+                                              @RequestParam(value = "text") String text) {
+        return ResponseEntity.ok(videoService.pagingByTitle(page, size, text));
+    }
 
 
 }

@@ -148,4 +148,15 @@ public class VideoService {
     }
 
 
+    public Object pagingByTitle(int page, int size, String text) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<VideoEntity> videoEntityPage = videoRepository.findAllByTitle("%"+text+"%", pageable);
+        long totalElements = videoEntityPage.getTotalElements();
+        List<VideoShortInfoDTO> list = new LinkedList<>();
+        videoEntityPage.getContent().forEach(content -> {
+            list.add(toVideoShortInfo(content));
+        });
+        return new PageImpl<>(list, pageable, totalElements);
+
+    }
 }

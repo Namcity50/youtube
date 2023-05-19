@@ -14,21 +14,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface VideoRepository extends CrudRepository<VideoEntity, String>, PagingAndSortingRepository<VideoEntity, String> {
-//    @Query(value = "select id,title,preview_attach_id,published_date,channel  from video where category_id = ?1 ",
-//            countQuery = "select count(*) from video where category_id =?1 ", nativeQuery = true)
-//    Page<VideoEntity> findAllByCategoryId(Pageable pageable, Integer id);
-
     @Query(value = "select new com.example.youtube.entity.VideoEntity (v.id ,v.title,v.previewAttachId,v.publishedDate," +
             " new com.example.youtube.entity.ChannelEntity(v.channelId,v.channel.name,v.channel.photoId)," +
-            "v.viewCount ) from VideoEntity as v where v.categoryId = ?1 ",
-            countQuery = "SELECT COUNT(v) FROM VideoEntity v WHERE v.categoryId = ?1")
+            "v.viewCount ) from VideoEntity as v where v.categoryId = ?1 ")
     Page<VideoEntity> findAllByCategoryId(Integer id, Pageable pageable);
-//@Query(value = "select new com.example.youtube.entity.VideoEntity (v.id ,v.title,v.previewAttachId,v.publishedDate," +
-//        " v.channel," +
-//        "v.viewCount ) from VideoEntity as v where v.categoryId = ?1 ",
-//        countQuery = "SELECT COUNT(v) FROM VideoEntity v WHERE v.categoryId = ?1")
-//Page<VideoEntity> findAllByCategoryId(Integer id, Pageable pageable);
-
     @Query("from VideoEntity where attachId = ?1 and channelId =?2 ")
     VideoEntity getByAttachAndChannel(String attachId, String channelId);
 
@@ -45,5 +34,8 @@ public interface VideoRepository extends CrudRepository<VideoEntity, String>, Pa
     @Query(value = "select view_count from video where id = ?1", nativeQuery = true)
     int getViewCount(String videoId);
 
-
+    @Query(value = "select new com.example.youtube.entity.VideoEntity (v.id ,v.title,v.previewAttachId,v.publishedDate," +
+            " new com.example.youtube.entity.ChannelEntity(v.channelId,v.channel.name,v.channel.photoId)," +
+            "v.viewCount ) from VideoEntity as v where v.title ilike ?1 ")
+    Page<VideoEntity> findAllByTitle(String text, Pageable pageable);
 }
