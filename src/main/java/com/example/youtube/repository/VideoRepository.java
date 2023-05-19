@@ -10,11 +10,14 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface VideoRepository extends CrudRepository<VideoEntity,String>, PagingAndSortingRepository<VideoEntity,String> {
+public interface VideoRepository extends CrudRepository<VideoEntity, String>, PagingAndSortingRepository<VideoEntity, String> {
 
     @Query("update VideoEntity set viewCount=:view_count+1 where id=:id")
     List<VideoEntity> findByIdAndViewCount(@Param("id") String id);
 
 
     Page<VideoEntity> findAllByCategoryId(Pageable pageable, Integer id);
+
+    @Query("from VideoEntity where attachId = ?1 and channelId =?2 ")
+    VideoEntity getByAttachAndChannel(String attachId, String channelId);
 }
