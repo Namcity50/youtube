@@ -47,7 +47,16 @@ public class SecurityConfig {
  */
     public static String[] AUTH_WHITELIST = {"/api/v1/*/public/**",
             "/api/v1/auth/**",
-            "/api/v1/auth"
+            "/api/v1/auth",
+            "/v2/api-docs",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-resources",
+            "/swagger-resources/**",
     };
 
     @Bean
@@ -71,12 +80,12 @@ public class SecurityConfig {
                 .requestMatchers("/api/v1/*/public/**").permitAll()
 //                .requestMatchers("/api/v1/auth/**").permitAll()
 //                .requestMatchers("/api/v1/auth").permitAll()
-//                .requestMatchers(AUTH_WHITELIST).permitAll()
+                .requestMatchers(AUTH_WHITELIST).permitAll()
                 .requestMatchers("/api/v1/*/private/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/v1/*/private/user/**").hasRole("USER")
                 .requestMatchers(HttpMethod.PUT, "/api/v1/playlist/private/*").hasAnyRole("USER","ADMIN")
                 .anyRequest()
-                .authenticated().and().httpBasic();
+                .authenticated();
         return http.build();
     }
 

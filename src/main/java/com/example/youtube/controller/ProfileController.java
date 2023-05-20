@@ -6,6 +6,8 @@ import com.example.youtube.dto.profile.ProfileResponseDTO;
 import com.example.youtube.enums.ProfileRole;
 import com.example.youtube.service.ProfileService;
 import com.example.youtube.util.JwtUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import org.apache.juli.logging.LogFactory;
@@ -16,14 +18,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.headers.HeadersSecurityMarker;
 import org.springframework.web.bind.annotation.*;
 
-
+@Tag(name = "Profile Api list", description = "Api list for profiles")
 @RestController
 @RequestMapping("/api/v1/profile")
 @AllArgsConstructor
 public class ProfileController {
     private final ProfileService profileService;
     private static final Logger LOGGER = LoggerFactory.getLogger(ProfileController.class);
-
+    @Operation(
+            summary = "Retrieve a Tutorial by Id",
+            description = "Get a Tutorial object by specifying its id. ")
     @PutMapping("/private/password")
     public ResponseEntity<Boolean> changePassword(@RequestParam(value = "pass") Integer pass){
 
