@@ -138,10 +138,10 @@ public class VideoService {
         dto.setId(entity.getId());
         dto.setTitle(entity.getTitle());
         String attachId = entity.getPreviewAttachId();
-        dto.setPreviewAttach(new AttachDTO(attachId, attachService.getAttachLink(attachId)));
+        dto.setPreviewAttach(new AttachDTO(attachId, attachService.getAttachByLink(attachId)));
         dto.setPublishedDate(entity.getPublishedDate());
         ChannelEntity channel = entity.getChannel();
-        dto.setChannelDTO(new ChannelDTO(channel.getId(), channel.getName(), attachService.getAttachLink(channel.getPhotoId())));
+        dto.setChannelDTO(new ChannelDTO(channel.getId(), channel.getName(), attachService.getAttachByLink(channel.getPhotoId())));
         dto.setViewCount(entity.getViewCount());
         return dto;
 
@@ -150,7 +150,7 @@ public class VideoService {
 
     public Object pagingByTitle(int page, int size, String text) {
         Pageable pageable = PageRequest.of(page - 1, size);
-        Page<VideoEntity> videoEntityPage = videoRepository.findAllByTitle("%"+text+"%", pageable);
+        Page<VideoEntity> videoEntityPage = videoRepository.findAllByTitle("%" + text + "%", pageable);
         long totalElements = videoEntityPage.getTotalElements();
         List<VideoShortInfoDTO> list = new LinkedList<>();
         videoEntityPage.getContent().forEach(content -> {
@@ -163,12 +163,26 @@ public class VideoService {
     public Object pagingByTag(int page, int size, Integer tagId) {
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<VideoEntity> videoEntityPage = videoRepository.findByTagId(tagId, pageable);
-        long totalElements = videoEntityPage.getTotalElements();
         List<VideoShortInfoDTO> list = new LinkedList<>();
         videoEntityPage.getContent().forEach(content -> {
             list.add(toVideoShortInfo(content));
         });
-        return new PageImpl<>(list, pageable, totalElements);
+        return new PageImpl<>(list, pageable, videoEntityPage.getTotalElements());
 
+    }
+
+    public Object getVideoById(String videoId) {
+        VideoEntity videoEntity = getById(videoId);
+        if (videoEntity.getStatus() == VideoStatus.PRIVATE) {
+            ////
+        }
+        return videoEntity;
+
+    }
+
+    public Object getVideoListAdmin(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        videoRepository.getVideoListAdmin(pageable);
+        return null;
     }
 }

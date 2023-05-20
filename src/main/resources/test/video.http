@@ -37,3 +37,6 @@ GET localhost:8080/api/v1/video/public/paging/1
 
 ### video paging by title
 GET localhost:8080/api/v1/video/public/title?text=o
+
+### get video by tag id
+GET localhost:8080/api/v1/video/public/tag/3

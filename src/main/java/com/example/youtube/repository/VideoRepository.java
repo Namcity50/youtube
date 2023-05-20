@@ -9,9 +9,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.repository.query.Param;
-
-import java.util.List;
 
 public interface VideoRepository extends CrudRepository<VideoEntity, String>, PagingAndSortingRepository<VideoEntity, String> {
     @Query(value = "select new com.example.youtube.entity.VideoEntity (v.id ,v.title,v.previewAttachId,v.publishedDate," +
@@ -45,4 +42,14 @@ public interface VideoRepository extends CrudRepository<VideoEntity, String>, Pa
             "v.viewCount ) from VideoEntity as v inner join VideoTagEntity as vt on vt.videoId=v.id " +
             " where vt.tagId=?1")
     Page<VideoEntity> findByTagId(Integer tagId, Pageable pageable);
+
+    @Query(value = "select new com.example.youtube.entity.VideoEntity (v.id ,v.title,v.previewAttachId,v.publishedDate," +
+            " new com.example.youtube.entity.ChannelEntity(v.channelId,v.channel.name,v.channel.photoId)," +
+            "v.viewCount ) from VideoEntity as v where v.id = ?1 ")
+    Page<VideoEntity> getVideoById(Integer id);
+
+    @Query(value = "select new com.example.youtube.entity.VideoEntity (v.id ,v.title,v.previewAttachId,v.publishedDate," +
+            " new com.example.youtube.entity.ChannelEntity(v.channelId,v.channel.name,v.channel.photoId)," +
+            "v.viewCount ) from VideoEntity as v  ")
+    void getVideoListAdmin(Pageable pageable);
 }
