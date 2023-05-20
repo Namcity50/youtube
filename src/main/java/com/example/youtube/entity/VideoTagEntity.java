@@ -1,4 +1,4 @@
-package com.example.youtube.entity.tag;
+package com.example.youtube.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,7 +28,7 @@ public class VideoTagEntity {
     private Integer tagId;
     @ManyToOne
     @JoinColumn(name = "tag_id", insertable = false, updatable = false)
-    private com.example.youtube.entity.tag.TagEntity tag;
+    private TagEntity tag;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate=LocalDateTime.now();

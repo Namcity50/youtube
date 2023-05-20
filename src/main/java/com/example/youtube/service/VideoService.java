@@ -1,10 +1,11 @@
 package com.example.youtube.service;
 
 import com.example.youtube.dto.attach.AttachDTO;
-import com.example.youtube.dto.video.VideShortInfoDTO;
+import com.example.youtube.dto.channel.ChannelDTO;
+import com.example.youtube.dto.video.VideoShortInfoDTO;
 import com.example.youtube.dto.video.VideoDTO;
+import com.example.youtube.dto.video.VideoUpdateDTO;
 import com.example.youtube.entity.ChannelEntity;
-import com.example.youtube.entity.ProfileEntity;
 import com.example.youtube.entity.VideoEntity;
 import com.example.youtube.enums.VideoStatus;
 import com.example.youtube.enums.VideoType;
@@ -22,7 +23,6 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -44,7 +44,8 @@ public class VideoService {
         entity.setTitle(dto.getTitle());
         entity.setCategoryId(dto.getCategoryId());
         entity.setAttachId(dto.getAttachId());
-        entity.setType(dto.getType());
+        entity.setType(VideoType.VIDEO);
+        entity.setStatus(VideoStatus.PUBLIC);
         entity.setDescription(dto.getDescription());
         entity.setChannelId(channel.getId());
         entity.setViewCount(0);
@@ -71,11 +72,12 @@ public class VideoService {
         videoDTO.setChannelId(entity.getChannelId());
         videoDTO.setLikeCount(entity.getLikeCount());
         videoDTO.setDislikeCount(entity.getDislikeCount());
+        videoDTO.setStatus(entity.getStatus());
         return videoDTO;
 
     }
 
-    public VideoDTO update(String id, VideoDTO dto) {
+    public VideoDTO update(String id, VideoUpdateDTO dto) {
         Integer profileId = SpringSecurityUtil.getProfileId();
         VideoEntity entity = getById(id);
         if (entity.getChannel().getProfileId() != profileId) {
@@ -84,33 +86,27 @@ public class VideoService {
         entity.setPreviewAttachId(dto.getPreviewAttachId());
         entity.setTitle(dto.getTitle());
         entity.setCategoryId(dto.getCategoryId());
-//        entity.setType(VideoType.VIDEO);
-        entity.setStatus(VideoStatus.PUBLIC);
-        entity.setViewCount(dto.getViewCount());
-        entity.setSharedCount(dto.getSharedCount());
         entity.setDescription(dto.getDescription());
-//        entity.setChannelId((dto.getChannelId()));
-        entity.setLikeCount(dto.getLikeCount());
-        entity.setDislikeCount(dto.getDislikeCount());
-        videoRepository.save(entity);
-        dto.setId(entity.getId());
-        return dto;
+        entity = videoRepository.save(entity);
+
+        return toDTO(entity);
     }
 
-    //
-//    public VideoDTO changeStatus(String id, VideoDTO dto) {
-//        Integer profileId = SpringSecurityUtil.getProfileId();
-//        VideoEntity vId = get(id);
-//        if (!profileId.equals(vId)) {
-//            throw new ItemNotFoundException(" videos not found!!!");
-//        }
-//        VideoEntity entity = new VideoEntity();
-//        entity.setStatus(VideoStatus.PUBLIC);
-//        videoRepository.save(entity);
-//        dto.setId(entity.getId());
-//        return dto;
-//    }
-//
+
+    public VideoDTO changeStatus(String id) {
+        Integer profileId = SpringSecurityUtil.getProfileId();
+        VideoEntity videoEntity = getById(id);
+        if (!profileId.equals(videoEntity.getChannel().getProfileId())) {
+            throw new ItemNotFoundException(" This video belong to other profile");
+        }
+        VideoStatus status;
+        if (videoEntity.getStatus().equals(VideoStatus.PRIVATE)) status = VideoStatus.PUBLIC;
+        else status = VideoStatus.PRIVATE;
+        videoRepository.changeStatus(status, videoEntity.getId());
+        videoEntity.setStatus(status);
+        return toDTO(videoEntity);
+    }
+
     public VideoEntity getById(String id) {
         Optional<VideoEntity> optional = videoRepository.findById(id);
         if (optional.isEmpty()) {
@@ -118,48 +114,61 @@ public class VideoService {
         }
         return optional.get();
     }
-//
-//
-//    public VideoDTO IncreaseViewCount(String id, VideoDTO dto) {
-//        List<VideoEntity> list = videoRepository.findByIdAndViewCount(id);
-//        list.forEach(entity -> {
-//            entity.setPreviewAttachId(dto.getPreview_attach_id());
-//            entity.setTitle(dto.getTitle());
-//            entity.setCategoryId(dto.getCategoryId());
-//            entity.setAttachId(dto.getAttachId());
-//            entity.setType(VideoType.VIDEO);
-//            entity.setStatus(VideoStatus.PUBLIC);
-//            entity.setViewCount(dto.getView_count());
-//            entity.setSharedCount(dto.getShared_count());
-//            entity.setDescription(dto.getDescription());
-//            entity.setChannelId((dto.getChannelId()));
-//            entity.setLikeCount(dto.getLike_count());
-//            entity.setDislikeCount(dto.getDislike_count());
-//            videoRepository.save(entity);
-//            dto.setId(entity.getId());
-//        });
-//        return dto;
-//    }
-//
-//    public Page<VideShortInfoDTO> getArticleByCategoryIdPaging(int page, int size, Integer id) {
-//        Pageable pageable = PageRequest.of(page - 1, size);
-//        Page<VideoEntity> videoEntityPage = videoRepository.findAllByCategoryId(pageable, id);
-//
-//        long totalElements = videoEntityPage.getTotalElements();
-//        List<VideoEntity> contentList = videoEntityPage.getContent();
-//        List<VideShortInfoDTO> list = new LinkedList<>();
-//      contentList.forEach(content->{
-//          list.add(toVideoShortInfo(content));
-//      });
-//      return new PageImpl<>(list,pageable,totalElements);
-//    }
-//
-//
-//    public VideShortInfoDTO toVideoShortInfo(VideoEntity entity) {
-//        VideShortInfoDTO dto = new VideShortInfoDTO();
-//        dto.setId(entity.getId());
-//        dto.setTitle(entity.getTitle());
-//        dto.setPreview_attach(attachService.getAttachLink(entity.getAttachId()));
-//        return dto;
-//    }
+
+
+    public int increaseViewCount(String videoId) {
+        videoRepository.increaseViewCount(videoId);
+        return videoRepository.getViewCount(videoId);
+    }
+
+    public Page<VideoShortInfoDTO> pagingByCategory(int page, int size, Integer id) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<VideoEntity> videoEntityPage = videoRepository.findAllByCategoryId(id, pageable);
+        long totalElements = videoEntityPage.getTotalElements();
+        List<VideoEntity> contentList = videoEntityPage.getContent();
+        List<VideoShortInfoDTO> list = new LinkedList<>();
+        contentList.forEach(content -> {
+            list.add(toVideoShortInfo(content));
+        });
+        return new PageImpl<>(list, pageable, totalElements);
+    }
+
+    private VideoShortInfoDTO toVideoShortInfo(VideoEntity entity) {
+        VideoShortInfoDTO dto = new VideoShortInfoDTO();
+        dto.setId(entity.getId());
+        dto.setTitle(entity.getTitle());
+        String attachId = entity.getPreviewAttachId();
+        dto.setPreviewAttach(new AttachDTO(attachId, attachService.getAttachLink(attachId)));
+        dto.setPublishedDate(entity.getPublishedDate());
+        ChannelEntity channel = entity.getChannel();
+        dto.setChannelDTO(new ChannelDTO(channel.getId(), channel.getName(), attachService.getAttachLink(channel.getPhotoId())));
+        dto.setViewCount(entity.getViewCount());
+        return dto;
+
+    }
+
+
+    public Object pagingByTitle(int page, int size, String text) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<VideoEntity> videoEntityPage = videoRepository.findAllByTitle("%"+text+"%", pageable);
+        long totalElements = videoEntityPage.getTotalElements();
+        List<VideoShortInfoDTO> list = new LinkedList<>();
+        videoEntityPage.getContent().forEach(content -> {
+            list.add(toVideoShortInfo(content));
+        });
+        return new PageImpl<>(list, pageable, totalElements);
+
+    }
+
+    public Object pagingByTag(int page, int size, Integer tagId) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<VideoEntity> videoEntityPage = videoRepository.findByTagId(tagId, pageable);
+        long totalElements = videoEntityPage.getTotalElements();
+        List<VideoShortInfoDTO> list = new LinkedList<>();
+        videoEntityPage.getContent().forEach(content -> {
+            list.add(toVideoShortInfo(content));
+        });
+        return new PageImpl<>(list, pageable, totalElements);
+
+    }
 }

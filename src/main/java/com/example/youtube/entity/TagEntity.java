@@ -1,4 +1,4 @@
-package com.example.youtube.entity.tag;
+package com.example.youtube.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

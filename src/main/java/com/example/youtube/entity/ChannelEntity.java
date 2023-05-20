@@ -39,5 +39,13 @@ public class ChannelEntity {
     @Column(name = "profile_id")
     private Integer profileId;
 
+    public ChannelEntity() {
+    }
+
+    public ChannelEntity(String id, String name, String photoId) {
+        this.id = id;
+        this.name = name;
+        this.photoId = photoId;
+    }
 }
 

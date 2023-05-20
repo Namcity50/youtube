@@ -1,12 +1,7 @@
 package com.example.youtube.service;
 
 import com.example.youtube.dto.comment.CommentDTO;
-import com.example.youtube.dto.video.VideShortInfoDTO;
-import com.example.youtube.dto.video.VideoDTO;
 import com.example.youtube.entity.CommentEntity;
-import com.example.youtube.entity.VideoEntity;
-import com.example.youtube.enums.VideoStatus;
-import com.example.youtube.enums.VideoType;
 import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.repository.CommentRepository;
 import com.example.youtube.util.SpringSecurityUtil;

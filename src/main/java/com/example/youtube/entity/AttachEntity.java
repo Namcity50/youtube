@@ -27,4 +27,7 @@ public class AttachEntity {
     private Integer duration;
     @Column(name = "created_date")
     private LocalDateTime createdDate;
+
+    public AttachEntity() {
+    }
 }

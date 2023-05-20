@@ -1,12 +1,12 @@
 
 
 ### Category crate
-POST http://localhost:8080/api/v1/category/private/create
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyNDUwNzUsImlkIjoxLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDMzMTQ3NSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.JdOYMPnxWF2AsP76XvqisN1GNR4IBUu57VQcm4k-hplAkC6P6_zlgn2gutAdz6mCLuVuAtvrLZTxBmPT3rN5BQ
+POST http://localhost:8080/api/v1/category/private/admin/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0OTYzOTUsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDU4Mjc5NSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.VyUylPAqzXlvsKnNvq1KOl08nzFkeInbRyIxj3eyLubThzgNscPd6Vlj9jcvV-pfSO55lE3he3Mw2Ns7J0sMMw
 Content-Type: application/json
 
 {
-"name": "Ali"
+"name": "music"
 }
 
 ### Category update with id
