@@ -1,8 +1,11 @@
 package com.example.youtube.service;
 
 import com.example.youtube.dto.comment.CommentDTO;
+import com.example.youtube.dto.comment.CommentResponseDTO;
+import com.example.youtube.dto.video.VideoResponseDTO;
 import com.example.youtube.entity.CommentEntity;
 import com.example.youtube.exps.ItemNotFoundException;
+import com.example.youtube.mapper.CommentMapperDTO;
 import com.example.youtube.repository.CommentRepository;
 import com.example.youtube.util.SpringSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +26,10 @@ public class CommentService {
 
     public CommentDTO create(CommentDTO dto) {
         CommentEntity entity = new CommentEntity();
-        entity.setProfile_id(dto.getProfile_id());
-        entity.setVideo_id(dto.getVideo_id());
+        dto.setProfileId(entity.getProfileId());
+        dto.setVideoId(entity.getVideoId());
         entity.setContent(dto.getContent());
-        entity.setReply_id(dto.getReply_id());
+        entity.setReplyId(dto.getReplyId());
         entity.setLike_count(dto.getLike_count());
         entity.setDislike_count(dto.getDislike_count());
         commentRepository.save(entity);
@@ -41,10 +44,10 @@ public class CommentService {
             throw new ItemNotFoundException(" comment not found!!!");
         }
         CommentEntity entity = get(id);
-        entity.setProfile_id(dto.getProfile_id());
-        entity.setVideo_id(dto.getVideo_id());
+        dto.setProfileId(entity.getProfileId());
+        dto.setVideoId(entity.getVideoId());;
         entity.setContent(dto.getContent());
-        entity.setReply_id(dto.getReply_id());
+        entity.setReplyId(dto.getReplyId());
         entity.setLike_count(dto.getLike_count());
         entity.setDislike_count(dto.getDislike_count());
         dto.setId(entity.getId());
@@ -61,7 +64,7 @@ public class CommentService {
     }
 
     public Boolean delete(Integer id) {
-            commentRepository.deleteArticle(id);
+            commentRepository.deleteComment(id);
             return true;
 
     }
@@ -76,8 +79,8 @@ public class CommentService {
         contentList.forEach(entity ->{
             CommentDTO dto = new CommentDTO();
             dto.setId(entity.getId());
-            dto.setProfile_id(entity.getProfile_id());
-            dto.setVideo_id(entity.getVideo_id());
+            dto.setProfileId(entity.getProfileId());
+            dto.setVideoId(entity.getVideoId());
             dto.setContent(entity.getContent());
             dto.setLike_count(entity.getLike_count());
             dto.setDislike_count(entity.getDislike_count());
@@ -90,23 +93,35 @@ public class CommentService {
     }
 
 
-    public List<CommentDTO> getProfileById(Integer id) {
-//        List<CommentEntity> listOfArticle = commentRepository.getProfileById(id);
-        List<CommentEntity> listOfArticle = null;
-        List<CommentDTO> dtoList = new LinkedList<>();
-        listOfArticle.forEach(entity -> {
-            CommentDTO dto = new CommentDTO();
-            dto.setId(entity.getId());
-            dto.setProfile_id(entity.getProfile_id());
-            dto.setVideo_id(entity.getVideo_id());
-            dto.setContent(entity.getContent());
-            dto.setLike_count(entity.getLike_count());
-            dto.setDislike_count(entity.getDislike_count());
-            dto.setCreate_date(entity.getCreated_date());
-            dtoList.add(dto);
-        });
-        return dtoList;
+
+        public List<CommentResponseDTO> getByProfileIdCommentList(Integer id) {
+            List<CommentMapperDTO> entityList = commentRepository.findByProfileId(id);
+            List<CommentResponseDTO> list = new LinkedList<>();
+
+            entityList.forEach(entity->{
+                list.add(toCommentShortInfo(entity));
+            });
+            return list;
+        }
+
+    private CommentResponseDTO toCommentShortInfo(CommentMapperDTO mapperDTO) {
+        CommentResponseDTO dto = new CommentResponseDTO();
+        dto.setId(mapperDTO.getId());
+        dto.setContent(mapperDTO.getContent());
+        dto.setCreated_date(mapperDTO.getCreatedDate());
+        dto.setLike_count(mapperDTO.getLikeCount());
+        dto.setDislike_count(mapperDTO.getDisLikeCount());
+        dto.setVideoResponseDTO(new VideoResponseDTO(mapperDTO.getId(),mapperDTO.getPreviewAttachId(),mapperDTO.getTitle()));
+        return dto;
     }
 
+    public List<CommentResponseDTO>  getByProfileCommentList(Integer id) {
+            List<CommentMapperDTO> entityList = commentRepository.findByProfileId(id);
+            List<CommentResponseDTO> list = new LinkedList<>();
 
+            entityList.forEach(entity->{
+                list.add(toCommentShortInfo(entity));
+            });
+            return list;
+    }
 }
