@@ -1,10 +1,11 @@
-package com.example.youtube.entity;
+package com.example.youtube.entity.tag;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+
 @Getter
 @Setter
 

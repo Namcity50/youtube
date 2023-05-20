@@ -151,9 +151,7 @@ public class AttachService {
     }
 
     public String getAttachLink(String attachId) {
-
         return (domainName + "/api/v1/attach/public/open/" + attachId);
-
     }
 
 }

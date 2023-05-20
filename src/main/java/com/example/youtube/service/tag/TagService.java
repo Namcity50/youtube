@@ -1,90 +1,81 @@
 package com.example.youtube.service.tag;
 
-import com.example.youtube.dto.tag.TagCreateDTO;
-import com.example.youtube.dto.tag.TagResponseDTO;
-import com.example.youtube.dto.tag.TagUpdateDTO;
-import com.example.youtube.entity.TagEntity;
-import com.example.youtube.enums.Language;
-import com.example.youtube.exps.TagNotFound;
+import com.example.youtube.dto.tag.TagDTO;
+import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.repository.TagRepository;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import com.example.youtube.entity.tag.TagEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class TagService {
     private final TagRepository tagRepository;
 
-
-
-    public TagResponseDTO create(TagCreateDTO dto) {
+    public TagDTO create(TagDTO dto) {
         TagEntity tagEntity = new TagEntity();
         if (!dto.getName().startsWith("#")) {
             tagEntity.setName("#" + dto.getName());
         } else {
             tagEntity.setName(dto.getName());
         }
-
         tagEntity.setCreatedDate(LocalDateTime.now());
         tagRepository.save(tagEntity);
-
-        TagResponseDTO response = new TagResponseDTO();
-        response.setId(tagEntity.getId());
-        response.setName(tagEntity.getName());
-        response.setCreatedDate(LocalDateTime.now());
-
-        return response;
+        //return
+        dto.setCreatedDate(tagEntity.getCreatedDate());
+        dto.setId(tagEntity.getId());
+        dto.setName(tagEntity.getName());
+        return dto;
     }
 
-    public Boolean updateById(Integer id, TagUpdateDTO tagUpdateDTO, Language language) {
-        Optional<TagEntity> byId = tagRepository.findById(id);
+    public Page<TagDTO> tagList(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<TagEntity> pageObj = tagRepository.findAll(pageable);
+        return new PageImpl<>(toList(pageObj.getContent()), pageable, pageObj.getTotalElements());
+    }
 
-//        if (byId.isEmpty()) {
-//            log.warn("Tag not found: {}", id);
-//            throw new TagNotFound(resourceBundleService.getMessage("tag.not.found", String.valueOf(language)));
-//        }
+    private List<TagDTO> toList(List<TagEntity> content) {
+        List<TagDTO> dtoList = new ArrayList<>();
+        content.forEach(tagEntity -> {
+            dtoList.add(toDTO(tagEntity));
+        });
+        return dtoList;
+    }
 
-        TagEntity tagEntity = byId.get();
-        if (!tagUpdateDTO.getName().startsWith("#")) {
-            tagEntity.setName("#" + tagUpdateDTO.getName());
+    public Object update(Integer tagId, TagDTO dto) {
+        TagEntity entity = getById(tagId);
+        if (!dto.getName().startsWith("#")) {
+            entity.setName("#" + dto.getName());
         } else {
-            tagEntity.setName(tagUpdateDTO.getName());
+            entity.setName(dto.getName());
         }
-
-        tagRepository.save(tagEntity);
-        return true;
+        entity = tagRepository.save(entity);
+        return toDTO(entity);
     }
 
-    public Boolean deleteById(Integer id, Language language) {
-        Optional<TagEntity> byId = tagRepository.findById(id);
-
-//        if (byId.isEmpty()) {
-//            log.warn("Tag not found: {}", id);
-//            throw new TagNotFound(resourceBundleService.getMessage("tag.not.found", String.valueOf(language)));
-//        }
-
-        tagRepository.delete(byId.get());
-        return true;
+    private TagDTO toDTO(TagEntity entity) {
+        TagDTO dto = new TagDTO();
+        dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setCreatedDate(entity.getCreatedDate());
+        return dto;
     }
 
-    public List<TagResponseDTO> tagList() {
-        Iterable<TagEntity> all = tagRepository.findAll();
+    private TagEntity getById(Integer tagId) {
+        return tagRepository.findById(tagId).orElseThrow(() -> {
+            throw new ItemNotFoundException("Tag not found");
+        });
+    }
 
-        List<TagResponseDTO> result = new ArrayList<>();
-        for (TagEntity tagEntity : all) {
-            TagResponseDTO response = new TagResponseDTO();
-            response.setId(tagEntity.getId());
-            response.setName(tagEntity.getName());
-            response.setCreatedDate(tagEntity.getCreatedDate());
-            result.add(response);
-        }
-
-        return result;
+    public void delete(Integer id) {
+        tagRepository.delete(getById(id));
     }
 }

@@ -27,7 +27,7 @@ public class ChannelService {
 
     public ChannelDTO create(ChannelDTO dto) {
         Integer profileId = SpringSecurityUtil.getProfileId();
-        ChannelEntity oldChannel = getProfileChannel(profileId);
+        ChannelEntity oldChannel = channelRepository.findByProfileIdAndStatus(profileId,GeneralStatus.ROLE_ACTIVE);
         if (oldChannel != null) {
             throw new MethodNotAllowedException("Method not allowed .One user create only one channel");
         }
@@ -47,8 +47,7 @@ public class ChannelService {
         return dto;
     }
 
-    private ChannelEntity getProfileChannel(Integer profileId) {
-
+    public ChannelEntity getProfileChannel(Integer profileId) {
         ChannelEntity entity = channelRepository.findByProfileIdAndStatus(profileId, GeneralStatus.ROLE_ACTIVE);
         if (entity == null) {
             throw new ItemNotFoundException("Channel not found");
