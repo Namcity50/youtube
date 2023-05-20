@@ -146,6 +146,7 @@ public class ChannelService {
     public ChannelDTO update(ChannelDTO dto) {
         Integer profileId = SpringSecurityUtil.getProfileId();
         ChannelEntity channel = getProfileChannel(profileId);
+
         channel.setPhotoId(dto.getPhotoId());
         channel.setBannerId(dto.getBannerId());
         channel.setName(dto.getName());

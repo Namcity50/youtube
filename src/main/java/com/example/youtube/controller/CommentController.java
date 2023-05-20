@@ -17,23 +17,29 @@ import org.springframework.web.bind.annotation.*;
  @EnableWebSecurity
 public class CommentController {
     private final CommentService commentService;
+
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/private/create")
     public ResponseEntity<?> create(@RequestBody CommentDTO dto) {
         return ResponseEntity.ok().body(commentService.create(dto));
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PutMapping("/private/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")Integer id,
                                     @RequestBody CommentDTO dto) {
         return ResponseEntity.ok().body(commentService.update(id,dto));
     }
 
+
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @DeleteMapping("/private/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id")Integer id) {
         return ResponseEntity.ok().body(commentService.delete(id));
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/public/getPaging")
     public ResponseEntity<?> Paging(@RequestParam(value = "page",defaultValue = "1")int page,
                                               @RequestParam(value = "size",defaultValue = "10")int size,
@@ -41,12 +47,13 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getPag(page,size,id));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/public/getByProfileId/{id}")
     public ResponseEntity<?> getProfileId(@PathVariable( "id")Integer id){
         return ResponseEntity.ok(commentService.getByProfileIdCommentList(id));
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     @GetMapping("/public/getByProfile")
     public ResponseEntity<?> getProfile(@PathVariable( "id")Integer id){
         return ResponseEntity.ok(commentService.getByProfileCommentList(id));
@@ -57,6 +64,11 @@ public class CommentController {
     @GetMapping("/public/getByVideoId")
     public ResponseEntity<?> getByVideoId(@PathVariable( "id")Integer id){
         return ResponseEntity.ok(commentService.getLIstByVideoId(id));
+    }
+
+    @GetMapping("/public/getByReplayId")
+    public ResponseEntity<?> getByReplayCommentId(@PathVariable( "id")Integer id){
+        return ResponseEntity.ok(commentService.getByReplayCommentId(id));
     }
 
 

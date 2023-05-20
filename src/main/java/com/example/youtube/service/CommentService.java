@@ -126,6 +126,16 @@ public class CommentService {
     }
 
 
+    //8
+    public List<CommentResponseInfoDTO> getByReplayCommentId(Integer id) {
+        List<CommentMapperInfoDTO> mapperDTOList = commentRepository.findByCommentId(id);
+        List<CommentResponseInfoDTO> list = new LinkedList<>();
+        mapperDTOList.forEach(entity -> {
+            list.add(toCommentInfo(entity));
+        });
+        return list;
+    }
+
     public CommentEntity get(Integer id) {
         Optional<CommentEntity> optional = commentRepository.findById(id);
         if (optional.isEmpty()) {
@@ -156,4 +166,6 @@ public class CommentService {
                 mapperDTO.getProfileSurname(), mapperDTO.getPhoto()));
         return dto;
     }
+
+
 }
