@@ -15,6 +15,7 @@ public class VideShortInfoDTO {
     private AttachDTO preview_attach;      //(id, url),
     private LocalDateTime published_date;
     private ChannelDTO channelDTO; //channel(id,name,photo(url)),
-   private Integer  view_count;
-   private String duration;
+    private Integer view_count;
+    private String duration;
+
 }
