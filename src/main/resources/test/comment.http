@@ -6,8 +6,13 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMzQ5NzgsImVtYWlsIjoic
 Content-Type:  application/json
 
 {
-  "title": "Code uz",
-  "attachId":"e1f7b0d7-4929-4476-b198-ed60fc925ebd"
+  "profileId": 2,
+  "videoId": "3",
+  "content": "comment qoldiring",
+  "replayId": 2,
+  "like_count": 43,
+  "dislike_count": 5,
+  "video": 1
 }
 
 
@@ -16,6 +21,16 @@ PUT localhost:8080/api/v1/comment/private/update/
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMjg3OTYsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWszM0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDE1MTk2LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.ikXJpLlq5mN3QyuQtJLr822Txzizz8pYFBzdnTdVD6L7v86-1Ov_B9oz4QqXO48hIIKA61OdIwMYZqKPYQcDFw
 Content-Type:  application/json
 
+
+{
+  "profileId": 2,
+  "videoId": "3",
+  "content": "comment qoldiring",
+  "replayId": 2,
+  "like_count": 43,
+  "dislike_count": 5,
+  "video": 1
+}
 
 ### comment  delete
 DELETE localhost:8080/api/v1/comment/private/delete/
