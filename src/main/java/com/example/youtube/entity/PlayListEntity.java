@@ -39,4 +39,12 @@ public class PlayListEntity {
     private LocalDateTime createdDate = LocalDateTime.now();
     @Column(name = "visible")
     private Boolean visible = Boolean.TRUE;
+
+    public PlayListEntity(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public PlayListEntity() {
+    }
 }

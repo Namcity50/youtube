@@ -59,10 +59,18 @@ public class VideoController {
     public ResponseEntity<?> getVideoById(@PathVariable(value = "id") String videoId) {
         return ResponseEntity.ok(videoService.getVideoById(videoId));
     }
+
     @GetMapping("/private/admin")
     public ResponseEntity<?> getVideoListAdmin(@RequestParam(value = "page", defaultValue = "1") int page,
                                                @RequestParam(value = "size", defaultValue = "10") int size) {
-        return ResponseEntity.ok(videoService.getVideoListAdmin(page,size));
+        return ResponseEntity.ok(videoService.getVideoListAdmin(page, size));
+    }
+
+    @GetMapping("/public/videos/{channelId}")
+    public ResponseEntity<?> getChannelVideoList(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                 @RequestParam(value = "size", defaultValue = "10") int size,
+                                                 @PathVariable("channelId") String channelId) {
+        return ResponseEntity.ok(videoService.getChannelVideoList(page, size,channelId));
     }
 
 }

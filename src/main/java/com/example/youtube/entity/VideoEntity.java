@@ -37,7 +37,7 @@ public class VideoEntity {
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
     @Column(name = "published_date")
-    private LocalDateTime publishedDate;
+    private LocalDateTime publishedDate = LocalDateTime.now();
     @Column(name = "type")
     private VideoType type;
     @Column(name = "view_count")
@@ -69,5 +69,13 @@ public class VideoEntity {
         this.title = title;
         this.viewCount = viewCount;
         this.channel = channel;
+    }
+
+    public VideoEntity(String id, String title, String previewAttachId, LocalDateTime publishedDate, Integer viewCount) {
+        this.id = id;
+        this.previewAttachId = previewAttachId;
+        this.title = title;
+        this.publishedDate = publishedDate;
+        this.viewCount = viewCount;
     }
 }

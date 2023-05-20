@@ -2,6 +2,8 @@ package com.example.youtube.service;
 
 import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.dto.channel.ChannelDTO;
+import com.example.youtube.dto.playList.PlaylistDTO;
+import com.example.youtube.dto.profile.ProfileDTO;
 import com.example.youtube.dto.video.VideoShortInfoDTO;
 import com.example.youtube.dto.video.VideoDTO;
 import com.example.youtube.dto.video.VideoUpdateDTO;
@@ -11,15 +13,16 @@ import com.example.youtube.enums.VideoStatus;
 import com.example.youtube.enums.VideoType;
 import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.exps.MethodNotAllowedException;
+import com.example.youtube.mapper.VideoOwnerPlayListInfoDTO;
+import com.example.youtube.mapper.VideoOwnerPlayListInfoMapper;
+import com.example.youtube.mapper.VideoPlayListInfo;
 import com.example.youtube.repository.VideoRepository;
 import com.example.youtube.util.SpringSecurityUtil;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -180,9 +183,44 @@ public class VideoService {
 
     }
 
-    public Object getVideoListAdmin(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        videoRepository.getVideoListAdmin(pageable);
-        return null;
+    public Page<VideoOwnerPlayListInfoDTO> getVideoListAdmin(int page, int size) {
+        Pageable pageable = PageRequest.of(page-1, size);
+        Page<VideoOwnerPlayListInfoMapper> videoOwnerPlayListInfoMappers = videoRepository.getVideoListAdmin(pageable);
+        List<VideoOwnerPlayListInfoDTO> dtoList = new ArrayList<>();
+        videoOwnerPlayListInfoMappers.getContent().forEach(videoOwnerPlayListInfoMapper -> {
+            dtoList.add(toVideoOwnerPlayList(videoOwnerPlayListInfoMapper));
+        });
+        return new PageImpl<>(dtoList, pageable, videoOwnerPlayListInfoMappers.getTotalElements());
+    }
+
+    private VideoOwnerPlayListInfoDTO toVideoOwnerPlayList(VideoOwnerPlayListInfoMapper videoOwnerPlayListInfoMapper) {
+        VideoEntity videoEntity = videoOwnerPlayListInfoMapper.getVideo();
+        VideoOwnerPlayListInfoDTO dto = new VideoOwnerPlayListInfoDTO();
+
+        VideoShortInfoDTO videoShortInfoDTO = toVideoShortInfo(videoEntity);
+        dto.setVideo(videoShortInfoDTO);
+
+        PlaylistDTO playlistDTO = new PlaylistDTO();
+        playlistDTO.setId(videoOwnerPlayListInfoMapper.getPlayList().getId());
+        playlistDTO.setName(videoOwnerPlayListInfoMapper.getPlayList().getName());
+        dto.setPlayList(playlistDTO);
+
+        ProfileDTO profileDTO = new ProfileDTO();
+        profileDTO.setId(videoOwnerPlayListInfoMapper.getProfile().getId());
+        profileDTO.setName(videoOwnerPlayListInfoMapper.getProfile().getName());
+        profileDTO.setPhoto(attachService.getAttachByLink(videoOwnerPlayListInfoMapper.getProfile().getPhotoId()));
+
+        dto.setProfile(profileDTO);
+        return dto;
+    }
+
+    public Object getChannelVideoList(int page, int size, String channelId) {
+        Pageable pageable = PageRequest.of(page-1, size, Sort.by(Sort.Direction.DESC, "createdDate"));
+        Page<VideoPlayListInfo> pageObj = videoRepository.getChannelVideoList(channelId, pageable);
+        List<VideoPlayListInfo> infoList = pageObj.getContent();
+        infoList.forEach(videoPlayListInfo -> {
+            videoPlayListInfo.setPreviewAttachLink(attachService.getAttachByLink(videoPlayListInfo.getId()));
+        });
+        return new PageImpl<>(infoList, pageable, pageObj.getTotalElements());
     }
 }
