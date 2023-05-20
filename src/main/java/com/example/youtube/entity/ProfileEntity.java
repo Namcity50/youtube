@@ -42,6 +42,12 @@ public class ProfileEntity {
     @Column(name = "photo_id")
     private String photoId;
 
+    public ProfileEntity(Integer id, String name, String photoId) {
+        this.id = id;
+        this.name = name;
+        this.photoId = photoId;
+    }
 
-
+    public ProfileEntity() {
+    }
 }

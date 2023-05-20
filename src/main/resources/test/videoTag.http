@@ -1,11 +1,11 @@
 ### video_tag create
 POST localhost:8080/api/v1/videotag/private/user/create
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0MDkyNTIsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWszM0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDk1NjUyLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.IpL9H-3E1XcaeYw4_U5neXouOWD9UJRbro3_vUYlc4hzgL-DhIUaY1cs6_NBTa4ilrMviG3toQ_hWE9BqNNeCA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0Nzk4NTQsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2Q5M0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NTY2MjU0LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.Bhu7WKzc1JH2MAIkXp8WhkN_n5N9hO2D5da_FenEV4l8odrJfz3IWVkPFUX-cvDzQ1tspYGvwpyRIjkdnsLe9g
 Content-Type: application/json
 
 {
-  "videoId": "gjjlfkglgkdl",
-  "tagId": "4"
+  "videoId": "d0865c47-0c52-4c0e-a7d2-20601aeba278",
+  "tagId": "3"
 }
 
 ### delete video Tag
