@@ -8,11 +8,13 @@ import com.example.youtube.service.CommentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/comment")
 @AllArgsConstructor
+ @EnableWebSecurity
 public class CommentController {
     private final CommentService commentService;
     @PostMapping("/private/create")
@@ -48,6 +50,13 @@ public class CommentController {
     @GetMapping("/public/getByProfile")
     public ResponseEntity<?> getProfile(@PathVariable( "id")Integer id){
         return ResponseEntity.ok(commentService.getByProfileCommentList(id));
+    }   //
+
+
+
+    @GetMapping("/public/getByVideoId")
+    public ResponseEntity<?> getByVideoId(@PathVariable( "id")Integer id){
+        return ResponseEntity.ok(commentService.getLIstByVideoId(id));
     }
 
 
