@@ -13,7 +13,7 @@ import java.util.UUID;
 public class PlaylistDTO {
     private Integer id;
     private String name;
-    private UUID channelId;
+    private String channelId;
     private String description;
     private PlayListEnums status;
     private Integer orderNumber;
