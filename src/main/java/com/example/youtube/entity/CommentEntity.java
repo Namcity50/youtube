@@ -33,6 +33,6 @@ public class CommentEntity {
     @Column(name = "dislike_count")
     private Integer dislike_count;
     @Column(name = "created_date")
-    private LocalDateTime created_date;
+    private LocalDateTime createdDate;
 
 }

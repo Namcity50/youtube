@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 public class CommentResponseInfoDTO {
     private Integer id;
     private String content;
-    private LocalDateTime created_date;
-    private Integer like_count;
-    private Integer dislike_count;
+    private LocalDateTime createdDate;
+    private Integer likeCount;
+    private Integer dislikeCount;
     private ProfileDTO profileDTO;
 }

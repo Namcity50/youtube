@@ -33,12 +33,11 @@ public class CommentService {
     //1
     public CommentDTO create(CommentDTO dto) {
         CommentEntity entity = new CommentEntity();
-        dto.setProfileId(entity.getProfileId());
-        dto.setVideoId(entity.getVideoId());
+        entity.setProfileId(dto.getProfileId());
+        entity.setVideoId(dto.getVideoId());
         entity.setContent(dto.getContent());
         entity.setReplyId(dto.getReplyId());
-        entity.setLike_count(dto.getLike_count());
-        entity.setDislike_count(dto.getDislike_count());
+        entity.setCreatedDate(dto.getCreatedDate());
         commentRepository.save(entity);
         dto.setId(entity.getId());
         return dto;
@@ -52,19 +51,17 @@ public class CommentService {
             throw new ItemNotFoundException(" comment not found!!!");
         }
         CommentEntity entity = get(id);
-        dto.setProfileId(entity.getProfileId());
-        dto.setVideoId(entity.getVideoId());
-        ;
+        entity.setProfileId(dto.getProfileId());
+        entity.setVideoId(dto.getVideoId());
         entity.setContent(dto.getContent());
         entity.setReplyId(dto.getReplyId());
-        entity.setLike_count(dto.getLike_count());
-        entity.setDislike_count(dto.getDislike_count());
         dto.setId(entity.getId());
         return dto;
     }
 
     //3
     public Boolean delete(Integer id) {
+        //
         commentRepository.deleteComment(id);
         return true;
 
@@ -84,8 +81,6 @@ public class CommentService {
             dto.setProfileId(entity.getProfileId());
             dto.setVideoId(entity.getVideoId());
             dto.setContent(entity.getContent());
-            dto.setLike_count(entity.getLike_count());
-            dto.setDislike_count(entity.getDislike_count());
             list.add(dto);
         });
 
@@ -148,9 +143,9 @@ public class CommentService {
         CommentResponseDTO dto = new CommentResponseDTO();
         dto.setId(mapperDTO.getId());
         dto.setContent(mapperDTO.getContent());
-        dto.setCreated_date(mapperDTO.getCreatedDate());
-        dto.setLike_count(mapperDTO.getLikeCount());
-        dto.setDislike_count(mapperDTO.getDisLikeCount());
+        dto.setCreatedDate(mapperDTO.getCreatedDate());
+        dto.setLikeCount(mapperDTO.getLikeCount());
+        dto.setDislikeCount(mapperDTO.getDisLikeCount());
         dto.setVideoResponseDTO(new VideoResponseDTO(mapperDTO.getVideoId(), mapperDTO.getPreviewAttachId(), mapperDTO.getTitle()));
         return dto;
     }
@@ -159,9 +154,9 @@ public class CommentService {
         CommentResponseInfoDTO dto = new CommentResponseInfoDTO();
         dto.setId(mapperDTO.getId());
         dto.setContent(mapperDTO.getContent());
-        dto.setCreated_date(mapperDTO.getCreatedDate());
-        dto.setLike_count(mapperDTO.getLikeCount());
-        dto.setDislike_count(mapperDTO.getDisLikeCount());
+        dto.setCreatedDate(mapperDTO.getCreatedDate());
+        dto.setLikeCount(mapperDTO.getLikeCount());
+        dto.setDislikeCount(mapperDTO.getDisLikeCount());
         dto.setProfileDTO(new ProfileDTO(mapperDTO.getProfileId(), mapperDTO.getProfileName(),
                 mapperDTO.getProfileSurname(), mapperDTO.getPhoto()));
         return dto;

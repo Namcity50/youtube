@@ -15,8 +15,8 @@ public class CommentDTO {
     private String videoId;
     private String content;
     private Integer replyId;
-    private Integer like_count;
-    private Integer dislike_count;
-    private LocalDateTime create_date;
-    private VideoDTO video;
+//    private Integer like_count;
+//    private Integer dislike_count;
+    private LocalDateTime createdDate;
+
 }

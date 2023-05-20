@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 public class CommentResponseDTO {
     private Integer id;
     private String content;
-    private LocalDateTime created_date;
-    private Integer like_count;
-    private Integer dislike_count;
+    private LocalDateTime createdDate;
+    private Integer likeCount;
+    private Integer dislikeCount;
     private VideoResponseDTO videoResponseDTO;    //(id, name, preview_attach_id, title, duration)
 }
