@@ -56,7 +56,7 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getPag(page,size));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/public/getByProfileId/{id}")
     public ResponseEntity<?> getProfileId(@PathVariable( "id")Integer id){
         return ResponseEntity.ok(commentService.getByProfileIdCommentList(id));

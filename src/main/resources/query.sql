@@ -29,3 +29,6 @@ select a.id                                                                     
 from article as a
          inner join region as r on r.id = a.region_id
          inner join category as c on c.id = a.category_id
+
+
+       insert into category(name_uz, name_ru, name_eng) values ('name_uz', 'name_ru', 'name_eng');
