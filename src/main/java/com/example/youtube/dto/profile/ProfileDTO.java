@@ -20,4 +20,8 @@ public class ProfileDTO {
 
     public ProfileDTO(Integer profileId, String profileName, String profileSurname, AttachDTO photo) {
     }
+
+    public ProfileDTO() {
+
+    }
 }
