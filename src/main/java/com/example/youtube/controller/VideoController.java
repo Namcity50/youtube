@@ -40,18 +40,37 @@ public class VideoController {
                                               @PathVariable(value = "c_id") Integer categoryId) {
         return ResponseEntity.ok(videoService.pagingByCategory(page, size, categoryId));
     }
+
     @GetMapping("/public/title")
     public ResponseEntity<?> pagingByTitle(@RequestParam(value = "page", defaultValue = "1") int page,
-                                              @RequestParam(value = "size", defaultValue = "10") int size,
-                                              @RequestParam(value = "text") String text) {
+                                           @RequestParam(value = "size", defaultValue = "10") int size,
+                                           @RequestParam(value = "text") String text) {
         return ResponseEntity.ok(videoService.pagingByTitle(page, size, text));
     }
+
     @GetMapping("/public/tag/{id}")
     public ResponseEntity<?> pagingByTag(@RequestParam(value = "page", defaultValue = "1") int page,
-                                           @RequestParam(value = "size", defaultValue = "10") int size,
-                                           @PathVariable(value = "id") Integer tagId) {
+                                         @RequestParam(value = "size", defaultValue = "10") int size,
+                                         @PathVariable(value = "id") Integer tagId) {
         return ResponseEntity.ok(videoService.pagingByTag(page, size, tagId));
     }
 
+    @GetMapping("/public/{id}")
+    public ResponseEntity<?> getVideoById(@PathVariable(value = "id") String videoId) {
+        return ResponseEntity.ok(videoService.getVideoById(videoId));
+    }
+
+    @GetMapping("/private/admin")
+    public ResponseEntity<?> getVideoListAdmin(@RequestParam(value = "page", defaultValue = "1") int page,
+                                               @RequestParam(value = "size", defaultValue = "10") int size) {
+        return ResponseEntity.ok(videoService.getVideoListAdmin(page, size));
+    }
+
+    @GetMapping("/public/videos/{channelId}")
+    public ResponseEntity<?> getChannelVideoList(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                 @RequestParam(value = "size", defaultValue = "10") int size,
+                                                 @PathVariable("channelId") String channelId) {
+        return ResponseEntity.ok(videoService.getChannelVideoList(page, size,channelId));
+    }
 
 }

@@ -39,3 +39,14 @@ GET localhost:8080/api/v1/video/public/paging/1
 
 ### video paging by title
 GET localhost:8080/api/v1/video/public/title?text=o
+
+### get video by tag id
+GET localhost:8080/api/v1/video/public/tag/3
+
+### Get Video List Pagination (ADMIN)
+GET localhost:8080/api/v1/video/private/admin
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ1NjAwNDgsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDY0NjQ0OCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.6WWxEGf-NFbUWU3GJpxdNRNRDLJ-Q2Appu-HLQZ2-an8oGt_BepfiMhUsGA-qb3Hjov5FCDlEgMiEiJCh8RFjA
+
+
+### get channel video by list pagination
+GET localhost:8080/api/v1/video/public/videos/38a7bf46-56bc-490f-8914-36c9457af802

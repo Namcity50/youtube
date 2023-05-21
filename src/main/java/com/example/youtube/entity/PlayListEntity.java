@@ -18,8 +18,8 @@ public class PlayListEntity {
     private Integer id;
     @Column(name = "name")
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "channel",insertable = false,updatable = false)
+    @ManyToOne()
+    @JoinColumn(name = "channel_id",insertable = false,updatable = false)
     private ChannelEntity channel;
     @Column(name = "channel_id")
     private String channelId;
@@ -31,7 +31,7 @@ public class PlayListEntity {
     @Column(name = "order_number")
     private Integer orderNumber;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile",insertable = false,updatable = false)
+    @JoinColumn(name = "profile_id",insertable = false,updatable = false)
     private ProfileEntity profile;
     @Column(name = "profile_id")
     private Integer profileId;
@@ -39,4 +39,12 @@ public class PlayListEntity {
     private LocalDateTime createdDate = LocalDateTime.now();
     @Column(name = "visible")
     private Boolean visible = Boolean.TRUE;
+
+    public PlayListEntity(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public PlayListEntity() {
+    }
 }

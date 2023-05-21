@@ -1,6 +1,6 @@
 package com.example.youtube.mapper;
 
-public interface PlayListMapper {
+public interface PlayListInfoMapper {
     Integer getId();
     String getName();
     String getDescription();
@@ -13,5 +13,6 @@ public interface PlayListMapper {
     String getProfileSurname();
     String getProPhotoId();
     String getChanPhotoId();
+
 
 }
