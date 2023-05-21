@@ -2,29 +2,27 @@
 
 ### cooment create
 POST localhost:8080/api/v1/comment/private/create
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ1OTA0NDgsImVtYWlsIjoiZGFzdG9ubmF6YXJvdjA5MTBAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDY3Njg0OCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.apwpC61ICmAeQJOo4y7XH1riDSZH2Ibxf32mEx3gBghPx6uxeqlBeLp-ev70bUT1UkbIGYjGrPwqvEZjTmE0Zw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ2NzQ0MDksImVtYWlsIjoiZGFzdG9ubmF6YXJvdjA5MTBAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDc2MDgwOSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.xFQv2k7C6Zp4hS4aDVFTqsucHl_GNZtjh3X84qOMthIrmY00ks6BihI1Dr_Xrfpo_Yx4RFxHnI_0G8CsHmNu6g
 Content-Type:  application/json
 
 {
-  "profileId":4,
-  "videoId": "3",
+  "profileId":1,
+  "videoId": "dc4a2c84-8ef1-49cc-a6f1-05e111c184e8",
   "content": "comment qoldiring",
-  "replayId": 5,
-  "video": 1
+  "replayId": 5
 }
 
 
 ### comment update
-PUT localhost:8080/api/v1/comment/private/update/
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ1OTA0NDgsImVtYWlsIjoiZGFzdG9ubmF6YXJvdjA5MTBAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDY3Njg0OCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.apwpC61ICmAeQJOo4y7XH1riDSZH2Ibxf32mEx3gBghPx6uxeqlBeLp-ev70bUT1UkbIGYjGrPwqvEZjTmE0Zw
+POST localhost:8080/api/v1/comment/private/update/10
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ2NzQ0MDksImVtYWlsIjoiZGFzdG9ubmF6YXJvdjA5MTBAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDc2MDgwOSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.xFQv2k7C6Zp4hS4aDVFTqsucHl_GNZtjh3X84qOMthIrmY00ks6BihI1Dr_Xrfpo_Yx4RFxHnI_0G8CsHmNu6g
 Content-Type:  application/json
 
 {
-  "profileId": 2,
-  "videoId": "3",
-  "content": "comment qoldiring",
-  "replayId": 2,
-  "video": 1
+  "profileId":1,
+  "videoId": "dc4a2c84-8ef1-49cc-a6f1-05e111c184e8",
+  "content": "update success",
+  "replayId": 5
 }
 
 ### comment  delete

@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +34,7 @@ public class CommentService {
     //1
     public CommentDTO create(CommentDTO dto) {
         CommentEntity entity = new CommentEntity();
+        entity.setId(dto.getId());
         entity.setProfileId(dto.getProfileId());
         entity.setVideoId(dto.getVideoId());
         entity.setContent(dto.getContent());
@@ -41,21 +43,35 @@ public class CommentService {
         commentRepository.save(entity);
         dto.setId(entity.getId());
         return dto;
+
+
     }
 
     //2
     public CommentDTO update(Integer id, CommentDTO dto) {
         Integer profileId = SpringSecurityUtil.getProfileId();
-        CommentEntity vId = get(id);
-        if (!profileId.equals(vId)) {
+        CommentEntity entity = get(id);
+        if (profileId != entity.getProfileId()) {
             throw new ItemNotFoundException(" comment not found!!!");
         }
-        CommentEntity entity = get(id);
+//        entity.setId(dto.getId());
         entity.setProfileId(dto.getProfileId());
         entity.setVideoId(dto.getVideoId());
         entity.setContent(dto.getContent());
         entity.setReplyId(dto.getReplyId());
+        commentRepository.save(entity);
         dto.setId(entity.getId());
+        return toDTO(entity);
+    }
+
+    public CommentDTO toDTO(CommentEntity entity){
+        CommentDTO dto = new CommentDTO();
+        dto.setId(entity.getId());
+        dto.setProfileId(entity.getProfileId());
+        dto.setVideoId(entity.getVideoId());
+        dto.setReplyId(entity.getReplyId());
+        dto.setContent(entity.getContent());
+        dto.setCreatedDate(LocalDateTime.now());
         return dto;
     }
 

@@ -75,6 +75,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/v1/*/private/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/v1/*/private/user/**").hasRole("USER")
                 .requestMatchers(HttpMethod.PUT, "/api/v1/playlist/private/*").hasAnyRole("USER","ADMIN")
+//                .requestMatchers(HttpMethod.POST, "/api/v1/comment/private/*").hasAnyRole("USER","ADMIN")
                 .anyRequest()
                 .authenticated().and().httpBasic();
         return http.build();

@@ -5,11 +5,16 @@ import com.example.youtube.dto.video.VideoDTO;
 import com.example.youtube.entity.VideoEntity;
 import com.example.youtube.repository.CommentRepository;
 import com.example.youtube.service.CommentService;
+import com.example.youtube.service.ProfileService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
+
+
 
 @RestController
 @RequestMapping("/api/v1/comment")
@@ -17,15 +22,20 @@ import org.springframework.web.bind.annotation.*;
  @EnableWebSecurity
 public class CommentController {
     private final CommentService commentService;
+    private static final Logger LOGGER =  LoggerFactory.getLogger(ProfileService.class);
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/private/create")
     public ResponseEntity<?> create(@RequestBody CommentDTO dto) {
+        LOGGER.trace("trace");
+        LOGGER.debug("debug");
+        LOGGER.warn("warn");
+        LOGGER.error("error");
         return ResponseEntity.ok().body(commentService.create(dto));
     }
 
-    @PreAuthorize("hasRole('USER')")
-    @PutMapping("/private/update/{id}")
+//    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/private/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")Integer id,
                                     @RequestBody CommentDTO dto) {
         return ResponseEntity.ok().body(commentService.update(id,dto));
