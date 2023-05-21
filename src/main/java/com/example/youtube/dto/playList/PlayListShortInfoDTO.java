@@ -2,7 +2,6 @@ package com.example.youtube.dto.playList;
 
 import com.example.youtube.dto.channel.ChannelPlayListShortInfoDTO;
 import com.example.youtube.dto.channel.ChannelShortInfoDTO;
-import com.example.youtube.dto.video.VideShortInfoDTO;
 import com.example.youtube.dto.video.VideoDTO;
 import com.example.youtube.dto.video.VideoPlayListShortInfoDTO;
 import com.example.youtube.entity.ChannelEntity;
