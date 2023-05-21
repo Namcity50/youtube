@@ -1,0 +1,21 @@
+### video_tag create
+POST localhost:8080/api/v1/videotag/private/user/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0MDkyNTIsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWszM0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDk1NjUyLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.IpL9H-3E1XcaeYw4_U5neXouOWD9UJRbro3_vUYlc4hzgL-DhIUaY1cs6_NBTa4ilrMviG3toQ_hWE9BqNNeCA
+Content-Type: application/json
+
+{
+  "videoId": "gjjlfkglgkdl",
+  "tagId": "4"
+}
+
+### delete video Tag
+DELETE localhost:8080/api/v1/videotag/private/user/delete?tId=1&vId=gjjlfkglgkdl
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0MDkyNTIsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWszM0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDk1NjUyLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.IpL9H-3E1XcaeYw4_U5neXouOWD9UJRbro3_vUYlc4hzgL-DhIUaY1cs6_NBTa4ilrMviG3toQ_hWE9BqNNeCA
+Content-Type: application/json
+
+### get tag list
+GET localhost:8080/api/v1/videotag/private/getByTagList?id=gjjlfkglgkdl
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0MDkyNTIsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWszM0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0NDk1NjUyLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.IpL9H-3E1XcaeYw4_U5neXouOWD9UJRbro3_vUYlc4hzgL-DhIUaY1cs6_NBTa4ilrMviG3toQ_hWE9BqNNeCA
+Content-Type: application/json
+
+

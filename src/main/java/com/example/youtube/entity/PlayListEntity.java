@@ -22,7 +22,7 @@ public class PlayListEntity {
     @JoinColumn(name = "channel",insertable = false,updatable = false)
     private ChannelEntity channel;
     @Column(name = "channel_id")
-    private UUID channelId;
+    private String channelId;
     @Column(name = "description")
     private String description;
     @Enumerated(EnumType.STRING)
