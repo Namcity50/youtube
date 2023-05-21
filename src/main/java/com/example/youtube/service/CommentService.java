@@ -84,7 +84,7 @@ public class CommentService {
     }
 
     //4
-   /* public Page<CommentDTO> getPag(int page, int size, Integer id) {
+    public Page<CommentDTO> getPag(int page, int size) {
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<CommentEntity> commentEntities = commentRepository.findAll(pageable);
 
@@ -99,25 +99,11 @@ public class CommentService {
             dto.setContent(entity.getContent());
             list.add(dto);
         });
-
-
         return new PageImpl<>(list, pageable, totalElements);
-    }*/
-
-
-    public Page<CommentDTO> pagination(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "content"));
-        Page<CommentEntity> entityPage = commentRepository.findAll(pageable);
-        return new PageImpl<>(toList(entityPage.getContent()), pageable, entityPage.getTotalElements());
     }
 
-    private List<CommentDTO> toList(List<CommentEntity> entityList) {
-        List<CommentDTO> dtoList = new ArrayList<>();
-        entityList.forEach(comment -> {
-            dtoList.add(toDTO(comment));
-        });
-        return dtoList;
-    }
+
+
 
     //5
     public List<CommentResponseDTO> getByProfileIdCommentList(Integer id) {

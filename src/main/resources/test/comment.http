@@ -37,7 +37,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ2NzQ0MDksImVtYWlsIjoiZ
 Content-Type:  application/json
 
 ### comment getByProfileId
-GET localhost:8080/api/v1/comment/public/getByProfileId/
+GET localhost:8080/api/v1/comment/public/getByProfileId/1
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ2NzQ0MDksImVtYWlsIjoiZGFzdG9ubmF6YXJvdjA5MTBAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDc2MDgwOSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.xFQv2k7C6Zp4hS4aDVFTqsucHl_GNZtjh3X84qOMthIrmY00ks6BihI1Dr_Xrfpo_Yx4RFxHnI_0G8CsHmNu6g
 Content-Type:  application/json
 
