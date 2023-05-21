@@ -1,12 +1,14 @@
 package com.example.youtube.service;
 
 import com.example.youtube.dto.attach.AttachDTO;
+import com.example.youtube.dto.channel.ChannelDTO;
 import com.example.youtube.dto.comment.CommentDTO;
 import com.example.youtube.dto.comment.CommentInfoDTO;
 import com.example.youtube.dto.comment.CommentResponseDTO;
 import com.example.youtube.dto.comment.CommentResponseInfoDTO;
 import com.example.youtube.dto.profile.ProfileDTO;
 import com.example.youtube.dto.video.VideoResponseDTO;
+import com.example.youtube.entity.ChannelEntity;
 import com.example.youtube.entity.CommentEntity;
 import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.mapper.CommentMapperDTO;
@@ -14,13 +16,11 @@ import com.example.youtube.mapper.CommentMapperInfoDTO;
 import com.example.youtube.repository.CommentRepository;
 import com.example.youtube.util.SpringSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -78,13 +78,13 @@ public class CommentService {
     //3
     public Boolean delete(Integer id) {
         //
-        commentRepository.deleteComment(id);
+        commentRepository.delete(get(id));
         return true;
 
     }
 
     //4
-    public Page<CommentDTO> getPag(int page, int size, Integer id) {
+   /* public Page<CommentDTO> getPag(int page, int size, Integer id) {
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<CommentEntity> commentEntities = commentRepository.findAll(pageable);
 
@@ -102,6 +102,21 @@ public class CommentService {
 
 
         return new PageImpl<>(list, pageable, totalElements);
+    }*/
+
+
+    public Page<CommentDTO> pagination(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "content"));
+        Page<CommentEntity> entityPage = commentRepository.findAll(pageable);
+        return new PageImpl<>(toList(entityPage.getContent()), pageable, entityPage.getTotalElements());
+    }
+
+    private List<CommentDTO> toList(List<CommentEntity> entityList) {
+        List<CommentDTO> dtoList = new ArrayList<>();
+        entityList.forEach(comment -> {
+            dtoList.add(toDTO(comment));
+        });
+        return dtoList;
     }
 
     //5

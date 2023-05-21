@@ -49,12 +49,11 @@ public class CommentController {
     }
 
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/public/getPaging")
     public ResponseEntity<?> Paging(@RequestParam(value = "page",defaultValue = "1")int page,
-                                              @RequestParam(value = "size",defaultValue = "10")int size,
-                                              @RequestParam(value = "id")Integer id){
-        return ResponseEntity.ok(commentService.getPag(page,size,id));
+                                              @RequestParam(value = "size",defaultValue = "10")int size){
+        return ResponseEntity.ok(commentService.pagination(page,size));
     }
 
     @PreAuthorize("hasRole('ADMIN')")

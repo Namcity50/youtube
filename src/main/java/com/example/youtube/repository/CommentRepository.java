@@ -17,10 +17,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface CommentRepository extends JpaRepository<CommentEntity, Integer> {
-    @Transactional
-    @Modifying
-    @Query("delete from CommentEntity   where id =:id")
-    int deleteComment(@Param("id") Integer id);
+
 
     Page<CommentEntity> findAll(Pageable pageable);
 
