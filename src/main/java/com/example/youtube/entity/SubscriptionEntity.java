@@ -38,5 +38,19 @@ public class SubscriptionEntity {
     @Enumerated(EnumType.STRING)
     private NotificationType notification;
 
+    public SubscriptionEntity(Integer id, ChannelEntity channel, NotificationType notification) {
+        this.id = id;
+        this.channel = channel;
+        this.notification = notification;
+    }
 
+    public SubscriptionEntity(Integer id, ChannelEntity channel, LocalDateTime createdDate, NotificationType notification) {
+        this.id = id;
+        this.channel = channel;
+        this.createdDate = createdDate;
+        this.notification = notification;
+    }
+
+    public SubscriptionEntity() {
+    }
 }

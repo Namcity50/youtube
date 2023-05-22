@@ -2,7 +2,9 @@ package com.example.youtube.service;
 
 import com.example.youtube.dto.SubscriptionCreatDTO;
 import com.example.youtube.dto.SubscriptionDTO;
+import com.example.youtube.dto.SubscriptionInfoDTO;
 import com.example.youtube.dto.SubscriptionUpdateDTO;
+import com.example.youtube.dto.channel.ChannelDTO;
 import com.example.youtube.entity.ChannelEntity;
 import com.example.youtube.entity.SubscriptionEntity;
 import com.example.youtube.enums.GeneralStatus;
@@ -11,15 +13,21 @@ import com.example.youtube.exps.ItemNotFoundException;
 import com.example.youtube.repository.SubscriptionRepository;
 import com.example.youtube.util.SpringSecurityUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class SubscriptionService {
     private SubscriptionRepository subscriptionRepository;
-    private ChannelService channelService;
+    private AttachService attachService;
 
 
     public Object create(SubscriptionCreatDTO dto) {
@@ -44,7 +52,7 @@ public class SubscriptionService {
 
     }
 
-    private Object toDTO(SubscriptionEntity subscription) {
+    private SubscriptionDTO toDTO(SubscriptionEntity subscription) {
         SubscriptionDTO dto = new SubscriptionDTO();
         dto.setId(subscription.getId());
         dto.setStatus(subscription.getStatus());
@@ -85,5 +93,52 @@ public class SubscriptionService {
         entity.setNotification(dto.getNotificationType());
         subscriptionRepository.save(entity);
         return toDTO(entity);
+    }
+
+    public Page<SubscriptionInfoDTO> list(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page-1, size);
+        Integer profileId = SpringSecurityUtil.getProfileId();
+        Page<SubscriptionEntity> pageObj = subscriptionRepository.findAllByStatus(profileId, pageable);
+        return new PageImpl<>(toSubscriptionInfoDTO(pageObj.getContent()), pageable, pageObj.getTotalElements());
+    }
+
+    private List<SubscriptionInfoDTO> toSubscriptionInfoDTO(List<SubscriptionEntity> content) {
+        List<SubscriptionInfoDTO> dtoList = new ArrayList<>();
+        content.forEach(subscriptionEntity -> {
+            SubscriptionInfoDTO infoDTO = new SubscriptionInfoDTO();
+            infoDTO.setId(subscriptionEntity.getId());
+            infoDTO.setNotificationType(subscriptionEntity.getNotification());
+            ChannelDTO channelDTO = new ChannelDTO();
+            ChannelEntity channel = subscriptionEntity.getChannel();
+            channelDTO.setId(channel.getId());
+            channelDTO.setName(channel.getName());
+            channelDTO.setPhotoId(attachService.getAttachByLink(channel.getPhotoId()));
+            infoDTO.setChannelDTO(channelDTO);
+            dtoList.add(infoDTO);
+        });
+        return dtoList;
+    }
+
+    public Object adminList(Integer profileId, Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page-1, size);
+        Page<SubscriptionEntity> pageObj = subscriptionRepository.findAllByStatusAdmin(profileId, pageable);
+        return new PageImpl<>(toSubscriptionInfoDTOAdmin(pageObj.getContent()), pageable, pageObj.getTotalElements());
+    }
+    private List<SubscriptionInfoDTO> toSubscriptionInfoDTOAdmin(List<SubscriptionEntity> content) {
+        List<SubscriptionInfoDTO> dtoList = new ArrayList<>();
+        content.forEach(subscriptionEntity -> {
+            SubscriptionInfoDTO infoDTO = new SubscriptionInfoDTO();
+            infoDTO.setId(subscriptionEntity.getId());
+            infoDTO.setNotificationType(subscriptionEntity.getNotification());
+            ChannelDTO channelDTO = new ChannelDTO();
+            ChannelEntity channel = subscriptionEntity.getChannel();
+            channelDTO.setId(channel.getId());
+            channelDTO.setName(channel.getName());
+            channelDTO.setPhotoId(attachService.getAttachByLink(channel.getPhotoId()));
+            infoDTO.setChannelDTO(channelDTO);
+            infoDTO.setCreatedDate(subscriptionEntity.getCreatedDate());
+            dtoList.add(infoDTO);
+        });
+        return dtoList;
     }
 }
