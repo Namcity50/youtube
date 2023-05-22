@@ -45,8 +45,12 @@ GET localhost:8080/api/v1/video/public/tag/3
 
 ### Get Video List Pagination (ADMIN)
 GET localhost:8080/api/v1/video/private/admin
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ1NjAwNDgsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDY0NjQ0OCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.6WWxEGf-NFbUWU3GJpxdNRNRDLJ-Q2Appu-HLQZ2-an8oGt_BepfiMhUsGA-qb3Hjov5FCDlEgMiEiJCh8RFjA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ3NTE3NzAsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDgzODE3MCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.psXxD-WzuFWoDB1SMRPNGx5RnwOo_QOxm4vBfMeB9XzQwX77kdesgxnlOTe2U-UjKom1uuZ3kir1f-W0HUkCAw
 
 
 ### get channel video by list pagination
 GET localhost:8080/api/v1/video/public/videos/38a7bf46-56bc-490f-8914-36c9457af802
+
+### get video by id if private allow only admin and owner
+GET http://localhost:8080/api/v1/video/private/d0865c47-0c52-4c0e-a7d2-20601aeba278
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ3NTE3NzAsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDgzODE3MCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.psXxD-WzuFWoDB1SMRPNGx5RnwOo_QOxm4vBfMeB9XzQwX77kdesgxnlOTe2U-UjKom1uuZ3kir1f-W0HUkCAw

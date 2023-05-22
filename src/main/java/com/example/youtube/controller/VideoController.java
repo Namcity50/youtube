@@ -55,7 +55,7 @@ public class VideoController {
         return ResponseEntity.ok(videoService.pagingByTag(page, size, tagId));
     }
 
-    @GetMapping("/public/{id}")
+    @GetMapping("/private/{id}")
     public ResponseEntity<?> getVideoById(@PathVariable(value = "id") String videoId) {
         return ResponseEntity.ok(videoService.getVideoById(videoId));
     }

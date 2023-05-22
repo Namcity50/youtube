@@ -8,7 +8,9 @@ import com.example.youtube.dto.video.VideoShortInfoDTO;
 import com.example.youtube.dto.video.VideoDTO;
 import com.example.youtube.dto.video.VideoUpdateDTO;
 import com.example.youtube.entity.ChannelEntity;
+import com.example.youtube.entity.ProfileEntity;
 import com.example.youtube.entity.VideoEntity;
+import com.example.youtube.enums.ProfileRole;
 import com.example.youtube.enums.VideoStatus;
 import com.example.youtube.enums.VideoType;
 import com.example.youtube.exps.ItemNotFoundException;
@@ -33,6 +35,7 @@ public class VideoService {
     private final VideoRepository videoRepository;
     private final AttachService attachService;
     private final ChannelService channelService;
+    private final ProfileService profileService;
 
     public VideoDTO create(VideoDTO dto) {
         Integer profileId = SpringSecurityUtil.getProfileId();
@@ -83,7 +86,7 @@ public class VideoService {
     public VideoDTO update(String id, VideoUpdateDTO dto) {
         Integer profileId = SpringSecurityUtil.getProfileId();
         VideoEntity entity = getById(id);
-        if (entity.getChannel().getProfileId() != profileId) {
+        if (!entity.getChannel().getProfileId() .equals(profileId)) {
             throw new MethodNotAllowedException("This video belong to other profile");
         }
         entity.setPreviewAttachId(dto.getPreviewAttachId());
@@ -175,16 +178,20 @@ public class VideoService {
     }
 
     public Object getVideoById(String videoId) {
+        Integer profileId = SpringSecurityUtil.getProfileId();
+        ProfileEntity profile = profileService.getById(profileId);
         VideoEntity videoEntity = getById(videoId);
         if (videoEntity.getStatus() == VideoStatus.PRIVATE) {
-            ////
+            if (!(profile.getRole().equals(ProfileRole.ROLE_ADMIN) || profileId.equals(videoEntity.getChannel().getProfileId()))) {
+                throw new MethodNotAllowedException("Method not allowed");
+            }
         }
-        return videoEntity;
+        return toDTO(videoEntity);
 
     }
 
     public Page<VideoOwnerPlayListInfoDTO> getVideoListAdmin(int page, int size) {
-        Pageable pageable = PageRequest.of(page-1, size);
+        Pageable pageable = PageRequest.of(page - 1, size);
         Page<VideoOwnerPlayListInfoMapper> videoOwnerPlayListInfoMappers = videoRepository.getVideoListAdmin(pageable);
         List<VideoOwnerPlayListInfoDTO> dtoList = new ArrayList<>();
         videoOwnerPlayListInfoMappers.getContent().forEach(videoOwnerPlayListInfoMapper -> {
@@ -215,7 +222,7 @@ public class VideoService {
     }
 
     public Object getChannelVideoList(int page, int size, String channelId) {
-        Pageable pageable = PageRequest.of(page-1, size, Sort.by(Sort.Direction.DESC, "createdDate"));
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by(Sort.Direction.DESC, "createdDate"));
         Page<VideoPlayListInfo> pageObj = videoRepository.getChannelVideoList(channelId, pageable);
         List<VideoPlayListInfo> infoList = pageObj.getContent();
         infoList.forEach(videoPlayListInfo -> {
