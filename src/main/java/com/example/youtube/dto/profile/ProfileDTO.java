@@ -1,4 +1,5 @@
 package com.example.youtube.dto.profile;
+import com.example.youtube.dto.attach.AttachDTO;
 import com.example.youtube.enums.GeneralStatus;
 import com.example.youtube.enums.ProfileRole;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -16,4 +17,11 @@ public class ProfileDTO {
     private String photo;
     private ProfileRole role;
     private GeneralStatus status;
+
+    public ProfileDTO(Integer profileId, String profileName, String profileSurname, AttachDTO photo) {
+    }
+
+    public ProfileDTO() {
+
+    }
 }

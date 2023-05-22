@@ -3,10 +3,10 @@ POST localhost:8080/api/v1/auth/public/register
 Content-Type:  application/json
 
 {
-  "name": "Elmurod",
-  "surname": "Saydaliyev",
-  "email": "saydaliyevelmurod01@gmail.com",
-  "password": "123456"
+  "name": "admin",
+  "surname": "adminov",
+  "email": "dastonnazarov0910@gmail.com",
+  "password": "11111!"
 }
 
 ### Login
@@ -15,7 +15,7 @@ Content-Type:  application/json
 
 {
 
-  "email": "saydaliyevelmurod01@gmail.com",
-  "password": "123456"
+  "email": "dastonnazarov0910@gmail.com",
+  "password": "11111!"
 
 }

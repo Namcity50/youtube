@@ -1,10 +1,12 @@
+
 POST http://localhost:8080/api/v1/attach/public/upload
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="test.jpg"
+Content-Disposition: form-data; name="file"; filename="BBGLlEO.JPEG"
 
-< C:\Users\Элмурод\Pictures\test.jpg
+#< C:\Users\Элмурод\Pictures\test.jpg
+C:\Users\Deweloper\OneDrive\Рабочий стол\test\BBGLlEO.JPEG
 
 ### video
 
