@@ -80,7 +80,7 @@ public class AttachService {
     public Resource download(String fileId) {
         try {
             AttachEntity attachEntity = get(fileId);
-            Path file = Paths.get(folderName + "/" + attachEntity.getPath() + "/" + fileId+"."+attachEntity.getExtension());
+            Path file = Paths.get(folderName + "/" + attachEntity.getPath() + "/" + fileId + "." + attachEntity.getExtension());
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
@@ -150,6 +150,9 @@ public class AttachService {
     }
 
     public String getAttachByLink(String attachId) {
+        if (attachId == null) {
+            return null;
+        }
         return (domainName + "/api/v1/attach/public/open/" + attachId);
     }
 

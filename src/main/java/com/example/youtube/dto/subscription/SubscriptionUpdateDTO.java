@@ -1,14 +1,17 @@
-package com.example.youtube.dto;
+package com.example.youtube.dto.subscription;
 
+import com.example.youtube.enums.GeneralStatus;
 import com.example.youtube.enums.NotificationType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class SubscriptionCreatDTO {
+public class SubscriptionUpdateDTO {
     @NotBlank(message = "channelId must have been some value")
     private String channelId;
+    private GeneralStatus status;
     private NotificationType notificationType;
 }
