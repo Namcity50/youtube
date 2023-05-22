@@ -1,0 +1,20 @@
+### create subscription
+POST localhost:8080/api/v1/subscription/private/create
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ3NDY1MTgsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2Q5M0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0ODMyOTE4LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.Txzuu2uenpER8LQtb_cTCsJGXoPDTyADRwTJpRnw_sefdnF-6qEC8GoBkOy2d_EhdYfNhpY7N-4KzhNThts2_Q
+Content-Type: application/json
+
+{
+  "channelId":"38a7bf46-56bc-490f-8914-36c9457af802",
+  "notificationType": "ALL"
+
+}
+
+### change status
+POST localhost:8080/api/v1/subscription/private/update
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ3NDY1MTgsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2Q5M0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0ODMyOTE4LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.Txzuu2uenpER8LQtb_cTCsJGXoPDTyADRwTJpRnw_sefdnF-6qEC8GoBkOy2d_EhdYfNhpY7N-4KzhNThts2_Q
+Content-Type: application/json
+
+{
+  "channelId": "38a7bf46-56bc-490f-8914-36c9457af802",
+  "status": "ROLE_BLOCK"
+}
