@@ -3,8 +3,8 @@ PUT localhost:8080/api/v1/profile/private/password?pass=5555
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyNTA5NTEsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWtAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDMzNzM1MSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.iCfPjA6eFh-LkdRQ6dwE-r1fdBViYngE669-9brnypOmfec0Pr4y560s_jBgfmFLmHysrMZyGrXIkujG5c3fPg
 
 ### Update email
-PUT localhost:8080/api/v1/profile/private/updateEmail?email=muxsinbekmuysinov@gmail.com
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMTE5OTcsImVtYWlsIjoibXV5c2lub3ZtdXhzaW5iZWs5MkBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0Mzk4Mzk3LCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.c9R47oMKsJk24fa0VMTXTpxfGcEgDg5yl-ZHpYgcm6a2Xb_1r2N3nYyUhTxi_SY_h8tR5k8pWY9CL5n3vRl6gg
+PUT localhost:8080/api/v1/profile/private/updateEmail?email=saydaliyevelmurod01@mail.ru
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ4MzMyOTEsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2Q5M0BnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjg0OTE5NjkxLCJpc3MiOiJLdW51eiB0ZXN0IHBvcnRhbGkifQ.KRURvBayD07xUNr5xEZ3Momlu_aXB4OFqtiZ5rH3oL_QHcz5-hR7uNW55IaBenaAafPRy5bvfoZ1GY6mf0Y34A
 
 ### Update NameAndSurname
 POST localhost:8080/api/v1/profile/private/updateNameAndSurname
@@ -18,18 +18,27 @@ Content-Type:  application/json
 
 ### Get detail
 GET localhost:8080/api/v1/profile
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMTYzNDksImVtYWlsIjoibXV4c2luYmVrbXV5c2lub3ZAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDQwMjc0OSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.3-AsG-yU87rP2las6FsOvx-Af-QWDFJnGlWazlW8IzxRjP6b74ZpLy5HMdfBRusk1GhaRc6CZoNWfyKLJGhQWA
-Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ4MzU4MDUsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBtYWlsLnJ1Iiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTY4NDkyMjIwNSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.YwbMhMTMDnFLUTDwrjmg5I6K5XkWJagX_Sy9V_BqKLM8pvbENw13d_MN2E6DGxHMHFQgDqDSdg3PGcqS6FYf-w
 
 ### Create Employee
 POST localhost:8080/api/v1/profile/private/admin/create
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQzMjI0NjksImVtYWlsIjoibXV4c2luYmVrbXV5c2lub3ZAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJleHAiOjE2ODQ0MDg4NjksImlzcyI6Ikt1bnV6IHRlc3QgcG9ydGFsaSJ9.K0TgPrC95dMAE0h5Npb1_M8jz_1A-syotNeEFMLKcOobwLQOmoF_hdPvH_Es0Nh9PbDszM32DXrZOJaU4KXxlg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ4MzYxMjMsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDkyMjUyMywiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.7BRJdCmPgl05444Xm2Er29VJ9j4NPpXb3vYjYsaEpgcCw5MmUDxKxKHZJe7Xqe-2yZoLV7q2LnCBsTzKqjnN0Q
 Content-Type:  application/json
 
 {
   "name": "jgjjgj",
   "surname": "lslslsl",
   "email": "muysinovmuxsinbek333@gmail.com",
-  "role": "ROLE_MODERATOR"
+  "role": "ROlE_MODERATOR"
 }
 
+
+### update image
+POST http://localhost:8080/api/v1/profile/private/update/photo
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ4MzYxMjMsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDkyMjUyMywiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.7BRJdCmPgl05444Xm2Er29VJ9j4NPpXb3vYjYsaEpgcCw5MmUDxKxKHZJe7Xqe-2yZoLV7q2LnCBsTzKqjnN0Q
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="test.jpg"
+
+< C:\Users\Элмурод\Pictures\test.jpg

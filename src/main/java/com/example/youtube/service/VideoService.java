@@ -179,7 +179,7 @@ public class VideoService {
 
     public Object getVideoById(String videoId) {
         Integer profileId = SpringSecurityUtil.getProfileId();
-        ProfileEntity profile = profileService.getById(profileId);
+        ProfileEntity profile = profileService.getByProfileId(profileId);
         VideoEntity videoEntity = getById(videoId);
         if (videoEntity.getStatus() == VideoStatus.PRIVATE) {
             if (!(profile.getRole().equals(ProfileRole.ROLE_ADMIN) || profileId.equals(videoEntity.getChannel().getProfileId()))) {

@@ -4,6 +4,7 @@ import com.example.youtube.entity.EmailHistoryEntity;
 import com.example.youtube.exps.MethodNotAllowedException;
 import com.example.youtube.repository.EmailHistoryRepository;
 import com.example.youtube.util.JwtUtil;
+import com.example.youtube.util.SpringSecurityUtil;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,5 +90,14 @@ public class MailSenderService {
         if (count >= emailLimit) {
             throw new MethodNotAllowedException("Many attempts in the given time. Try again after one");
         }
+    }
+    public void sendUpdateEmail(String toAccount) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Update verification.\n");
+        stringBuilder.append("Click to below link to complete update email\n");
+        stringBuilder.append("Link: ");
+        stringBuilder.append(serverHost).append("/api/v1/profile/public/email/update/");
+        stringBuilder.append(JwtUtil.encodeToUpdateEmail(toAccount, SpringSecurityUtil.getProfileId()));
+        sendEmail(toAccount, "Update email", stringBuilder.toString());
     }
 }

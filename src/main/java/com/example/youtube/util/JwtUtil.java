@@ -1,4 +1,5 @@
 package com.example.youtube.util;
+
 import com.example.youtube.dto.jwt.JwtDTO;
 import com.example.youtube.enums.ProfileRole;
 import com.example.youtube.exps.MethodNotAllowedException;
@@ -7,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+
 @Service
 public class JwtUtil {
     private static final int tokenLiveTime = 1000 * 3600 * 24; // 1-day
@@ -25,6 +27,19 @@ public class JwtUtil {
         return jwtBuilder.compact();
     }
 
+    public static String encodeToUpdateEmail(String email, Integer pId) {
+        JwtBuilder jwtBuilder = Jwts.builder();
+        jwtBuilder.setIssuedAt(new Date());
+        jwtBuilder.signWith(SignatureAlgorithm.HS512, secretKey);
+
+        jwtBuilder.claim("email", email);
+        jwtBuilder.claim("id", pId);
+
+        jwtBuilder.setExpiration(new Date(System.currentTimeMillis() + (tokenLiveTime)));
+        jwtBuilder.setIssuer("Kunuz test portali");
+        return jwtBuilder.compact();
+    }
+
     public static String encode(String text) {
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.setIssuedAt(new Date());
@@ -37,15 +52,24 @@ public class JwtUtil {
 
     public static JwtDTO decode(String token) {
 
-            JwtParser jwtParser = Jwts.parser();
-            jwtParser.setSigningKey(secretKey);
-            Jws<Claims> jws = jwtParser.parseClaimsJws(token);
-            Claims claims = jws.getBody();
-            String email = (String) claims.get("email");
-            String role = (String) claims.get("role");
-            ProfileRole profileRole = ProfileRole.valueOf(role);
-            return new JwtDTO(email, profileRole);
+        JwtParser jwtParser = Jwts.parser();
+        jwtParser.setSigningKey(secretKey);
+        Jws<Claims> jws = jwtParser.parseClaimsJws(token);
+        Claims claims = jws.getBody();
+        String email = (String) claims.get("email");
+        String role = (String) claims.get("role");
+        ProfileRole profileRole = ProfileRole.valueOf(role);
+        return new JwtDTO(email, profileRole);
 
+    }
+    public static JwtDTO decodeToUpdateEmail(String token) {
+        JwtParser jwtParser = Jwts.parser();
+        jwtParser.setSigningKey(secretKey);
+        Jws<Claims> jws = jwtParser.parseClaimsJws(token);
+        Claims claims = jws.getBody();
+        String email = (String) claims.get("email");
+        Integer pId = (Integer) claims.get("id");
+        return new JwtDTO(email, pId);
     }
 
     public static String decodeEmailVerification(String token) {
@@ -83,6 +107,7 @@ public class JwtUtil {
         }
         return jwtDTO;
     }
+
     public static void checkForRequiredRole(HttpServletRequest request, ProfileRole... roleList) {
         ProfileRole jwtRole = (ProfileRole) request.getAttribute("role");
         boolean roleFound = false;
