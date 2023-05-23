@@ -1,5 +1,7 @@
-package com.example.youtube.entity;
+package com.example.youtube.entity.videoLike;
 
+import com.example.youtube.entity.ProfileEntity;
+import com.example.youtube.entity.VideoEntity;
 import com.example.youtube.enums.LikeType;
 import jakarta.persistence.*;
 import lombok.Getter;

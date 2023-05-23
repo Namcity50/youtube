@@ -1,6 +1,6 @@
-package com.example.youtube.repository;
+package com.example.youtube.repository.videoLike;
 
-import com.example.youtube.entity.VideoLikeEntity;
+import com.example.youtube.entity.videoLike.VideoLikeEntity;
 import com.example.youtube.enums.LikeType;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
