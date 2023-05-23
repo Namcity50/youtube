@@ -128,7 +128,7 @@ public class CommentService {
     }
 
     //7
-    public List<CommentResponseInfoDTO> getLIstByVideoId(Integer id) {
+    public List<CommentResponseInfoDTO> getLIstByVideoId(String id) {
         List<CommentMapperInfoDTO> mapperDTOList = commentRepository.findByVideoId(id);
         List<CommentResponseInfoDTO> list = new LinkedList<>();
         mapperDTOList.forEach(entity -> {

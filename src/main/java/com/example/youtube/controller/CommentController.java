@@ -70,12 +70,12 @@ public class CommentController {
 
 
 
-    @GetMapping("/public/getByVideoId")
-    public ResponseEntity<?> getByVideoId(@PathVariable( "id")Integer id){
+    @GetMapping("/public/getByVideoId/{id}")
+    public ResponseEntity<?> getByVideoId(@PathVariable( "id")String id){
         return ResponseEntity.ok(commentService.getLIstByVideoId(id));
     }
 
-    @GetMapping("/public/getByReplayId")
+    @GetMapping("/public/getByReplayId/{id}")
     public ResponseEntity<?> getByReplayCommentId(@PathVariable( "id")Integer id){
         return ResponseEntity.ok(commentService.getByReplayCommentId(id));
     }
