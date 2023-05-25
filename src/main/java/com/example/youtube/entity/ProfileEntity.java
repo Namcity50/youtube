@@ -41,7 +41,9 @@ public class ProfileEntity {
 
     @Column(name = "photo_id")
     private String photoId;
-
+    @OneToOne
+    @JoinColumn(name = "photo_id", insertable = false, updatable = false)
+    private AttachEntity photo;
 
 
 }
