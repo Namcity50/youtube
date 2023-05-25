@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "category")
 public class CategoryEntity {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-     @Column(name = "name")
-     private String name;
-     @Column(name = "created_date")
-     private LocalDateTime created_date = LocalDateTime.now();
+    @Column(name = "name")
+    private String name;
+    @Column(name = "created_date")
+    private LocalDateTime created_date = LocalDateTime.now();
     @Column(name = "prt_id")
     private Integer prtId;
     @Column(name = "visible")

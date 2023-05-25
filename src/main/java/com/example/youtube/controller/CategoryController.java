@@ -22,7 +22,7 @@ public class CategoryController {
 
 
     @PutMapping("/private/admin/update/{id}")
-    public ResponseEntity<Boolean> update(@PathVariable("id") Integer id,
+    public ResponseEntity<?> update(@PathVariable("id") Integer id,
                                           @RequestBody CategoryDTO dto) {
         return ResponseEntity.ok(categoryService.update(id, dto));
     }
@@ -34,7 +34,7 @@ public class CategoryController {
 
     @GetMapping("/getAll")
     public ResponseEntity<Page<CategoryDTO>> getAll(@RequestParam(value = "page", defaultValue = "1") int page,
-                                                    @RequestParam(value = "size", defaultValue = "2") int size) {
+                                                    @RequestParam(value = "size", defaultValue = "10") int size) {
         return ResponseEntity.ok(categoryService.getAll(page, size));
     }
 

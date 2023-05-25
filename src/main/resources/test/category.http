@@ -2,29 +2,29 @@
 
 ### Category crate
 POST http://localhost:8080/api/v1/category/private/admin/create
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQ0OTYzOTUsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDU4Mjc5NSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.VyUylPAqzXlvsKnNvq1KOl08nzFkeInbRyIxj3eyLubThzgNscPd6Vlj9jcvV-pfSO55lE3he3Mw2Ns7J0sMMw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODUwMDE2NTAsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NTA4ODA1MCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.2dvM9VQJ2dsJxxA-TKA3x2z7uX9duHAj60Ti-0S3YT_AXSNGMGTzJu_PEvm1sFO9iX5Oxb6bzpfX2euxj-1DMA
 Content-Type: application/json
 
 {
-"name": "music"
+  "name": "game",
+  "visible": true
 }
 
 ### Category update with id
-PUT http://localhost:8080/api/v1/category/private/update/
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyNDUwNzUsImlkIjoxLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDMzMTQ3NSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.JdOYMPnxWF2AsP76XvqisN1GNR4IBUu57VQcm4k-hplAkC6P6_zlgn2gutAdz6mCLuVuAtvrLZTxBmPT3rN5BQ
+PUT http://localhost:8080/api/v1/category/private/admin/update/5
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODUwMDE2NTAsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NTA4ODA1MCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.2dvM9VQJ2dsJxxA-TKA3x2z7uX9duHAj60Ti-0S3YT_AXSNGMGTzJu_PEvm1sFO9iX5Oxb6bzpfX2euxj-1DMA
 Content-Type: application/json
 
 {
-  "name": "Vali"
+  "name": "Game",
+  "visible": true
 }
 
 ### Category delete with id
-DELETE http://localhost:8080/api/v1/category/private/delete/
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyNDUwNzUsImlkIjoxLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDMzMTQ3NSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.JdOYMPnxWF2AsP76XvqisN1GNR4IBUu57VQcm4k-hplAkC6P6_zlgn2gutAdz6mCLuVuAtvrLZTxBmPT3rN5BQ
-Content-Type: application/json
+DELETE http://localhost:8080/api/v1/category/private/admin/delete/6
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODUwMDE2NTAsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NTA4ODA1MCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.2dvM9VQJ2dsJxxA-TKA3x2z7uX9duHAj60Ti-0S3YT_AXSNGMGTzJu_PEvm1sFO9iX5Oxb6bzpfX2euxj-1DMA
 
 
 ### Category getList
-DELETE http://localhost:8080/api/v1/category/getAll
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODQyNDUwNzUsImlkIjoxLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NDMzMTQ3NSwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.JdOYMPnxWF2AsP76XvqisN1GNR4IBUu57VQcm4k-hplAkC6P6_zlgn2gutAdz6mCLuVuAtvrLZTxBmPT3rN5BQ
-Content-Type: application/json
+GET http://localhost:8080/api/v1/category/getAll
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2ODUwMDE2NTAsImVtYWlsIjoic2F5ZGFsaXlldmVsbXVyb2QwMUBnbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImV4cCI6MTY4NTA4ODA1MCwiaXNzIjoiS3VudXogdGVzdCBwb3J0YWxpIn0.2dvM9VQJ2dsJxxA-TKA3x2z7uX9duHAj60Ti-0S3YT_AXSNGMGTzJu_PEvm1sFO9iX5Oxb6bzpfX2euxj-1DMA
