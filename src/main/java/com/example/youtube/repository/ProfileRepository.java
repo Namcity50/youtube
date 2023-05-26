@@ -27,8 +27,5 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity,Integer>
     int updateNameAndSurname(Integer id, String name, String surname);
     @Query(value = " select * from profile where id = ?1 ", nativeQuery = true)
     ProfileEntity findByProfile(Integer id);
-//    @Modifying
-//    @Transactional
-//    @Query("update ProfileEntity set attachId =?1")
-//    int updateAttach(String id);
+
 }

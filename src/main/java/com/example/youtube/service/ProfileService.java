@@ -59,31 +59,6 @@ public class ProfileService {
         return i > 0;
     }
 
-    //    public Boolean changeAttach(MultipartFile file) {
-//        Integer id = SpringSecurityUtil.getProfileId();
-//        Optional<ProfileEntity> optional = profileRepository.findById(id);
-//        ProfileEntity entity = optional.get();
-//        try {
-//            String pathFolder = attachService.getYmDString(); // 2022/04/23
-//            File folder = new File(folderName + "/" + pathFolder);  // attaches/2023/04/26
-//            if (!folder.exists()) {
-//                folder.mkdirs();
-//            }
-//            byte[] bytes = file.getBytes();
-//            String extension = attachService.getExtension(file.getOriginalFilename());
-//        AttachEntity attachEntity = attachService.get(name);
-//        if (!entity.getAttachId().equals(attachEntity.getId())) {
-//            entity.setAttachId(attachEntity.getId());
-//        }
-//        profileRepository.deleteById(entity.getId());
-//        Path file1 = Paths.get("attaches/" + dto.getPhoto());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        entity.setAttachId(attachEntity.getId());
-//        profileRepository.save(entity);
-//        return true;
-//    }
     public ProfileResponseDTO getDetail() {
         Integer id = SpringSecurityUtil.getProfileId();
         ProfileEntity entity = profileRepository.findByProfile(id);

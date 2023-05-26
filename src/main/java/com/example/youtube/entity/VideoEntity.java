@@ -19,21 +19,25 @@ public class VideoEntity {
     private String id;
     @Column(name = "preview_attach_id")
     private String previewAttachId;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "preview_attach_id", insertable = false, updatable = false)
     private AttachEntity previewAttach;
     @Column(name = "title")
     private String title;
+
     @Column(name = "category_id")
     private Integer categoryId;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", insertable = false, updatable = false)
     private CategoryEntity category;
+
     @Column(name = "attach_id")
     private String attachId;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attach_id", insertable = false, updatable = false)
     private AttachEntity attach;
+
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
     @Column(name = "published_date")
