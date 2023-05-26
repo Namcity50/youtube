@@ -32,4 +32,6 @@ public class AttachEntity {
     }
     @Column(name = "updated_date")
     private LocalDateTime updatedDate;
+    @Column
+    private String type;
 }

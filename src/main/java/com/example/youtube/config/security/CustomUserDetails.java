@@ -9,6 +9,12 @@ import java.util.Collection;
 import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
+    private Integer id;
+
+    public CustomUserDetails(Integer id) {
+        this.id = id;
+    }
+
     private ProfileEntity profileEntity;
 
     public CustomUserDetails(ProfileEntity profileEntity) {
@@ -56,4 +62,10 @@ public class CustomUserDetails implements UserDetails {
     public ProfileEntity getProfileEntity() {
         return profileEntity;
     }
+
+
+    public Integer getId() {
+        return id;
+    }
+
 }
